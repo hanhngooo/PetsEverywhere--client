@@ -17,9 +17,9 @@ export default function SignUp() {
 
   useEffect(() => {
     if (token !== null) {
-      history.push("/profile");
+      history.push("/");
     }
-  }, [token, history]);
+  }, [token]);
 
   function submitForm(event) {
     console.log("hi");
