@@ -95,6 +95,7 @@ export const getUserWithStoredToken = () => {
 
       // token is still valid
       dispatch(tokenStillValid(response.data));
+      console.log("response", response.data);
       dispatch(appDoneLoading());
     } catch (error) {
       if (error.response) {
@@ -133,7 +134,7 @@ export const uploadNewPost = (imageURL, caption) => {
       );
       dispatch(showMessageWithTimeout("success", false, "Updated new post"));
       console.log("responsed data", response.data);
-      // dispatch(postSuccess(response.data.post));
+      dispatch(postSuccess(response.data));
     } catch (error) {
       console.log("error", error);
     }

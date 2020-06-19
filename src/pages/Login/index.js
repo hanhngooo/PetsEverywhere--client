@@ -19,7 +19,7 @@ export default function SignUp() {
     if (token !== null) {
       history.push("/");
     }
-  }, [token]);
+  }, [token, history]);
 
   function submitForm(event) {
     console.log("hi");

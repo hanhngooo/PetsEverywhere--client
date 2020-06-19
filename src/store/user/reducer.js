@@ -9,7 +9,7 @@ const initialState = {
   token: localStorage.getItem("token"),
   name: null,
   email: null,
-  posts: null,
+  posts: [],
 };
 
 export default (state = initialState, action) => {
@@ -26,7 +26,7 @@ export default (state = initialState, action) => {
       return { ...state, ...action.payload };
 
     case NEW_POST_SUCCESS:
-      return { ...state, posts: action.payload };
+      return { ...state, posts: [...state.posts, action.payload] };
 
     default:
       return state;
