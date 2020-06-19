@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 
 import Form from "react-bootstrap/Form";
-import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import Image from "react-bootstrap/Image";
 
 import { uploadNewPost } from "../../store/user/actions";
 
@@ -12,6 +12,8 @@ function Upload() {
   const [fileInput, setFileInput] = useState("");
   const [captionInput, setCaptionInput] = useState("");
   const [previewSource, setPreviewSource] = useState("");
+  const [showModal, setShowModal] = useState(false);
+
   const dispatch = useDispatch();
   const handleFileInput = (event) => {
     const file = event.target.files[0];
@@ -33,37 +35,51 @@ function Upload() {
     setShowModal(false);
     console.log("how does it look like", previewSource);
   };
-  const [showModal, setShowModal] = useState(false);
   return (
-    <Container>
+    <div>
       <Button onClick={() => setShowModal(true)}>New Post</Button>
-      <Modal show={showModal}>
-        <Form>
-          <Form.Group controlId="formBasicName">
-            <Form.Label>Upload your new photo/video here!</Form.Label>
-            <Form.Control
-              value={fileInput}
-              onChange={handleFileInput}
-              type="file"
-              name="image"
+      <Modal size="lg" show={showModal} onHide={() => setShowModal(false)}>
+        <Modal.Header closeButton>
+          Upload a cute photo of your pet!
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group controlId="formBasicName">
+              <Form.Control
+                value={fileInput}
+                onChange={handleFileInput}
+                type="file"
+                name="image"
+              />
+            </Form.Group>
+            <Form.Group controlId="formBasicName">
+              <Form.Control
+                value={captionInput}
+                onChange={(event) => setCaptionInput(event.target.value)}
+                type="input"
+                name="image"
+                placeholder="Write a caption..."
+              />
+            </Form.Group>
+          </Form>
+          {previewSource && (
+            <Image
+              src={previewSource}
+              alt="preview"
+              style={{ height: "300px", with: "auto" }}
             />
-          </Form.Group>
-          <Form.Group controlId="formBasicName">
-            <Form.Control
-              value={captionInput}
-              onChange={(event) => setCaptionInput(event.target.value)}
-              type="input"
-              name="image"
-              placeholder="Write a caption..."
-            />
-          </Form.Group>
-          <Button onClick={uploadFile}>Upload</Button>
-        </Form>
-        {previewSource && (
-          <img src={previewSource} alt="preview" style={{ height: "300px" }} />
-        )}
+          )}
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setShowModal(false)}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={uploadFile}>
+            Upload
+          </Button>
+        </Modal.Footer>
       </Modal>
-    </Container>
+    </div>
   );
 }
 
