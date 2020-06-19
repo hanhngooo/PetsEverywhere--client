@@ -7,7 +7,7 @@ import { apiUrl } from "../../config/constants";
 
 function Upload() {
   const [fileInput, setFileInput] = useState("");
-  // const [selectedFile, setSelectedFile] = useState("");
+  const [captionInput, setCaptionInput] = useState("");
   const [previewSource, setPreviewSource] = useState("");
   const handleFileInput = (event) => {
     const file = event.target.files[0];
@@ -24,6 +24,8 @@ function Upload() {
     event.preventDefault();
     if (!previewSource) return;
     uploadImage(previewSource);
+    setCaptionInput("");
+    setPreviewSource("");
     console.log("how does it look like", previewSource);
   };
   const uploadImage = async () => {
@@ -31,6 +33,7 @@ function Upload() {
     try {
       const response = await axios.post(`${apiUrl}/posts/uploadFile`, {
         imageURL: previewSource,
+        caption: captionInput,
       });
     } catch (error) {
       console.log("error", error);
@@ -47,15 +50,20 @@ function Upload() {
             type="file"
             name="image"
           />
-          <Button onClick={uploadFile}>Upload</Button>
         </Form.Group>
+        <Form.Group controlId="formBasicName">
+          <Form.Control
+            value={captionInput}
+            onChange={(event) => setCaptionInput(event.target.value)}
+            type="input"
+            name="image"
+            placeholder="Write a caption..."
+          />
+        </Form.Group>
+        <Button onClick={uploadFile}>Upload</Button>
       </Form>
       {previewSource && (
-        <img
-          src={previewSource}
-          alt="image-preview"
-          style={{ height: "300px" }}
-        />
+        <img src={previewSource} alt="preview" style={{ height: "300px" }} />
       )}
     </Container>
   );
