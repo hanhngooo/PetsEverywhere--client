@@ -34,10 +34,10 @@ function App() {
       <MessageBox />
       {isLoading ? <Loading /> : null}
       <Switch>
-        <Route exact path="/" component={Home} />
-        {token ? <Route path="/profile" component={Profile} /> : null}
-        <Route path="/signup" component={SignUp} />
-        <Route path="/login" component={Login} />
+        {token ? <Route exact path="/home" component={Home} /> : null}
+        <Route path="/profile" component={Profile} />
+        <Route path="/signUp" component={SignUp} />
+        <Route path="/" component={Login} />
       </Switch>
     </div>
   );
