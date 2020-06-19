@@ -1,14 +1,17 @@
 import React, { useState } from "react";
-import axios from "axios";
+import { useDispatch } from "react-redux";
+
 import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
-import { apiUrl } from "../../config/constants";
+
+import { uploadNewPost } from "../../store/user/actions";
 
 function Upload() {
   const [fileInput, setFileInput] = useState("");
   const [captionInput, setCaptionInput] = useState("");
   const [previewSource, setPreviewSource] = useState("");
+  const dispatch = useDispatch();
   const handleFileInput = (event) => {
     const file = event.target.files[0];
     previewFile(file);
@@ -23,22 +26,12 @@ function Upload() {
   const uploadFile = (event) => {
     event.preventDefault();
     if (!previewSource) return;
-    uploadImage(previewSource);
+    dispatch(uploadNewPost(previewSource, captionInput));
     setCaptionInput("");
     setPreviewSource("");
     console.log("how does it look like", previewSource);
   };
-  const uploadImage = async () => {
-    console.log();
-    try {
-      const response = await axios.post(`${apiUrl}/posts/uploadFile`, {
-        imageURL: previewSource,
-        caption: captionInput,
-      });
-    } catch (error) {
-      console.log("error", error);
-    }
-  };
+
   return (
     <Container>
       <Form>
