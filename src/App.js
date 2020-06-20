@@ -23,7 +23,7 @@ function App() {
   const dispatch = useDispatch();
   const isLoading = useSelector(selectAppLoading);
   const token = useSelector(selectToken);
-  console.log(token);
+  // console.log(token);
   useEffect(() => {
     dispatch(getUserWithStoredToken());
   }, [dispatch]);
