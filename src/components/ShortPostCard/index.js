@@ -7,11 +7,9 @@ export default function ShortPostCard(props) {
     <Card key={props.post.id} style={{ width: "20rem" }}>
       {props.post.images &&
         props.post.images.map((image) => {
-          //   return <Card.Img key={image.id} variant="top" src={image.imageURL} />;
           return (
-            <CloudinaryContext>
+            <CloudinaryContext key={image.id}>
               <Image
-                key={image.id}
                 cloudName="hanhngo"
                 publicId={image.public_Id}
                 width="300"

@@ -26,7 +26,7 @@ export default (state = initialState, action) => {
       return { ...state, ...action.payload };
 
     case NEW_POST_SUCCESS:
-      return { ...state, posts: [...state.posts, action.payload] };
+      return { ...state, posts: [action.payload, ...state.posts] };
 
     default:
       return state;

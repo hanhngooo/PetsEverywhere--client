@@ -132,8 +132,9 @@ export const uploadNewPost = (imageURL, caption) => {
           },
         }
       );
-      dispatch(showMessageWithTimeout("success", false, "Updated new post"));
       console.log("responsed data", response.data);
+
+      dispatch(showMessageWithTimeout("success", false, "Updated new post"));
       dispatch(postSuccess(response.data));
     } catch (error) {
       console.log("error", error);
