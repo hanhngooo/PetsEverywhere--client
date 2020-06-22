@@ -149,7 +149,7 @@ export const editProfileSuccess = (user) => ({
   payload: user,
 });
 
-export const editProfile = (description) => {
+export const editProfile = (name, description) => {
   return async (dispatch, getState) => {
     try {
       const { token, id } = selectUser(getState());
@@ -158,6 +158,7 @@ export const editProfile = (description) => {
       const response = await axios.patch(
         `${apiUrl}/${id}`,
         {
+          name,
           description,
         },
         {

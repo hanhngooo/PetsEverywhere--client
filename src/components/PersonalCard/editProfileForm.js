@@ -8,49 +8,55 @@ import { selectUser } from "../../store/user/selectors";
 import { editProfile } from "../../store/user/actions";
 
 export default function EditProfileForm() {
-  // const { description } = useSelector(selectUser);
+  const { name, description } = useSelector(selectUser);
+
   const [showModal, setShowModal] = useState(false);
+  const [profilePicInput, setProfilePicInput] = useState("");
+  const [previewSource, setPreviewSource] = useState("");
+  const [newName, setNewName] = useState("");
   const [descriptionInput, setDescriptionInput] = useState("");
   const dispatch = useDispatch();
 
+  function onClickEdit() {
+    setShowModal(true);
+    setNewName(name);
+    setDescriptionInput(description);
+  }
   function updateProfile(event) {
     event.preventDefault();
-    dispatch(editProfile(descriptionInput));
+    dispatch(editProfile(newName, descriptionInput));
     setDescriptionInput("");
+
     setShowModal(false);
   }
   return (
     <div>
-      <Button onClick={() => setShowModal(true)}>Edit Profile</Button>
+      <Button onClick={onClickEdit}>Edit Profile</Button>
       <Modal size="lg" show={showModal} onHide={() => setShowModal(false)}>
-        <Modal.Header closeButton>Edit your Profile</Modal.Header>
+        <Modal.Header closeButton>Edit Your Profile</Modal.Header>
         <Modal.Body>
           <Form>
-            {/* <Form.Group controlId="formBasicName">
+            <Form.Group controlId="formBasicName">
+              <Form.Label>Profile Picture</Form.Label>
+            </Form.Group>
+            <Form.Group controlId="formBasicName">
+              <Form.Label>Name</Form.Label>
               <Form.Control
-                value={fileInput}
-                onChange={handleFileInput}
-                type="file"
-                name="image"
+                value={newName}
+                onChange={(event) => setNewName(event.target.value)}
+                type="input"
               />
-            </Form.Group> */}
+            </Form.Group>
             <Form.Group controlId="formBasicName">
               <Form.Label>Description</Form.Label>
               <Form.Control
                 value={descriptionInput}
                 onChange={(event) => setDescriptionInput(event.target.value)}
                 type="input"
-                placeholder=""
+                // placeholder={description}
               />
             </Form.Group>
           </Form>
-          {/* {previewSource && (
-            <Image
-              src={previewSource}
-              alt="preview"
-              style={{ height: "300px", with: "auto" }}
-            />
-          )} */}
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={() => setShowModal(false)}>

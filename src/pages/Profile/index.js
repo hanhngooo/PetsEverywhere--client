@@ -25,21 +25,24 @@ function Profile() {
 
   return (
     <Container>
-      <ProfilePic profile_pic={profile_pic} />
-      <PersonalCard
-        profile_pic={profile_pic}
-        name={name}
-        description={description}
-        posts={posts.length}
-      />
-
-      <Upload />
-      <CardColumns className="mt-3">
-        {posts &&
-          posts.map((post, index) => {
-            return <ShortPostCard key={index} post={post} />;
-          })}
+      <CardColumns className="mt-2">
+        <ProfilePic profile_pic={profile_pic} />
+        <PersonalCard
+          profile_pic={profile_pic}
+          name={name}
+          description={description}
+          posts={posts.length}
+        />
       </CardColumns>
+      <Container>
+        <Upload />
+        <CardColumns className="mt-3">
+          {posts &&
+            posts.map((post, index) => {
+              return <ShortPostCard key={index} post={post} />;
+            })}
+        </CardColumns>
+      </Container>
     </Container>
   );
 }

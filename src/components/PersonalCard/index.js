@@ -1,6 +1,5 @@
 import React from "react";
 import Container from "react-bootstrap/Container";
-import { Image, CloudinaryContext, Transformation } from "cloudinary-react";
 import EditProfileForm from "./editProfileForm";
 export default function PersonalCard(props) {
   return (
