@@ -33,7 +33,7 @@ function Upload() {
     setCaptionInput("");
     setPreviewSource("");
     setShowModal(false);
-    console.log("how does it look like", previewSource);
+    // console.log("how does it look like", previewSource);
   };
   return (
     <div>

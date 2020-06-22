@@ -1,6 +1,6 @@
 import { apiUrl } from "../../config/constants";
 import axios from "axios";
-import { selectToken } from "./selectors";
+import { selectToken, selectUser } from "./selectors";
 import {
   appLoading,
   appDoneLoading,
@@ -12,6 +12,7 @@ export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const TOKEN_STILL_VALID = "TOKEN_STILL_VALID";
 export const LOG_OUT = "LOG_OUT";
 export const NEW_POST_SUCCESS = "NEW_POST_SUCCESS";
+export const EDIT_PROFILE_SUCCESS = "EDIT_PROFILE_SUCCESS";
 const loginSuccess = (userWithToken) => {
   return {
     type: LOGIN_SUCCESS,
@@ -137,6 +138,40 @@ export const uploadNewPost = (imageURL, caption) => {
 
       dispatch(showMessageWithTimeout("success", false, "Updated new post"));
       dispatch(postSuccess(response.data));
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
+};
+
+export const editProfileSuccess = (user) => ({
+  type: EDIT_PROFILE_SUCCESS,
+  payload: user,
+});
+
+export const editProfile = (description) => {
+  return async (dispatch, getState) => {
+    try {
+      const { token, id } = selectUser(getState());
+      dispatch(appLoading());
+
+      const response = await axios.patch(
+        `${apiUrl}/${id}`,
+        {
+          description,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      dispatch(
+        showMessageWithTimeout("success", false, "edit successfull", 3000)
+      );
+      dispatch(editProfileSuccess(response.data));
+      dispatch(appDoneLoading());
     } catch (error) {
       console.log("error", error);
     }

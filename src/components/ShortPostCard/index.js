@@ -12,8 +12,9 @@ export default function ShortPostCard(props) {
               <Image
                 cloudName="hanhngo"
                 publicId={image.public_Id}
-                width="300"
-                crop="scale"
+                width="320"
+                height="320"
+                crop="fill"
               />
             </CloudinaryContext>
           );

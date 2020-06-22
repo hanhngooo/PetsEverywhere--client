@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Container from "react-bootstrap/Container";
+import CardColumns from "react-bootstrap/CardColumns";
 
 import Upload from "../../components/UploadCard";
 import ShortPostCard from "../../components/ShortPostCard";
 import PersonalCard from "../../components/PersonalCard";
 import ProfilePic from "../../components/PersonalCard/profilePic";
-
 // import Loading from "../../components/Loading";
 import { selectUser } from "../../store/user/selectors";
 import { fetchPostByUserId } from "../../store/profile/actions";
@@ -32,11 +32,14 @@ function Profile() {
         description={description}
         posts={posts.length}
       />
+
       <Upload />
-      {posts &&
-        posts.map((post, index) => {
-          return <ShortPostCard key={index} post={post} />;
-        })}
+      <CardColumns className="mt-3">
+        {posts &&
+          posts.map((post, index) => {
+            return <ShortPostCard key={index} post={post} />;
+          })}
+      </CardColumns>
     </Container>
   );
 }
