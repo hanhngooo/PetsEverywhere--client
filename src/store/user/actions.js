@@ -13,6 +13,7 @@ export const TOKEN_STILL_VALID = "TOKEN_STILL_VALID";
 export const LOG_OUT = "LOG_OUT";
 export const NEW_POST_SUCCESS = "NEW_POST_SUCCESS";
 export const EDIT_PROFILE_SUCCESS = "EDIT_PROFILE_SUCCESS";
+export const UPDATE_PROFILE_PIC_SUCCESS = "UPDATE_PROFILE_PIC_SUCCESS";
 const loginSuccess = (userWithToken) => {
   return {
     type: LOGIN_SUCCESS,
@@ -172,6 +173,40 @@ export const editProfile = (name, description) => {
         showMessageWithTimeout("success", false, "edit successfull", 3000)
       );
       dispatch(editProfileSuccess(response.data));
+      dispatch(appDoneLoading());
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
+};
+
+export const updateProfilePicSuccess = (user) => ({
+  type: UPDATE_PROFILE_PIC_SUCCESS,
+  payload: user,
+});
+
+export const updateProfilePic = (profile_pic) => {
+  return async (dispatch, getState) => {
+    try {
+      const { token, id } = selectUser(getState());
+      dispatch(appLoading());
+
+      const response = await axios.patch(
+        `${apiUrl}/${id}/profilePic`,
+        {
+          profile_pic,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      dispatch(
+        showMessageWithTimeout("success", false, "edit successfull", 3000)
+      );
+      dispatch(updateProfilePicSuccess(response.data));
       dispatch(appDoneLoading());
     } catch (error) {
       console.log("error", error);

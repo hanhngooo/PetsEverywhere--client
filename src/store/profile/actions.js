@@ -10,8 +10,12 @@ const postsByUserIdFetched = (posts) => ({
 
 export const fetchPostByUserId = (userId) => {
   return async (dispatch, getState) => {
-    const response = await axios.get(`${apiUrl}/${userId}`);
-    console.log("posts by user", response.data);
-    dispatch(postsByUserIdFetched(response.data));
+    try {
+      const response = await axios.get(`${apiUrl}/${userId}`);
+      console.log("posts by user", response.data);
+      dispatch(postsByUserIdFetched(response.data));
+    } catch (error) {
+      console.log("error", error);
+    }
   };
 };

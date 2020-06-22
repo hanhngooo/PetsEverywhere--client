@@ -19,10 +19,6 @@ function Profile() {
     dispatch(fetchPostByUserId(id));
   }, [dispatch, id]);
 
-  // if (posts === null) {
-  //   return <Loading />;
-  // }
-
   return (
     <Container>
       <CardColumns className="mt-2">
