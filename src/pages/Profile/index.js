@@ -1,5 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+
 import Container from "react-bootstrap/Container";
 import CardColumns from "react-bootstrap/CardColumns";
 
@@ -35,7 +37,11 @@ function Profile() {
         <CardColumns className="mt-3">
           {posts &&
             posts.map((post, index) => {
-              return <ShortPostCard key={index} post={post} />;
+              return (
+                <Link to={`/post/${post.id}`}>
+                  <ShortPostCard key={index} post={post} />;
+                </Link>
+              );
             })}
         </CardColumns>
       </Container>

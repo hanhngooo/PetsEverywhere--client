@@ -18,6 +18,11 @@ const Home = () => (
     <h1>Home</h1>
   </Jumbotron>
 );
+const PostDetail = () => (
+  <Jumbotron>
+    <h1>Post Detail</h1>
+  </Jumbotron>
+);
 
 function App() {
   const dispatch = useDispatch();
@@ -38,6 +43,7 @@ function App() {
         {token ? <Route path="/profile" component={Profile} /> : null}
         <Route path="/signUp" component={SignUp} />
         <Route path="/login" component={Login} />
+        <Route path="/post/:id" component={PostDetail} />
       </Switch>
     </div>
   );
