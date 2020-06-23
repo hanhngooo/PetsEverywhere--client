@@ -38,7 +38,7 @@ function Profile() {
           {posts &&
             posts.map((post, index) => {
               return (
-                <Link to={`/post/${post.id}`}>
+                <Link to={`/post/${post.id}`} key={index}>
                   <ShortPostCard key={index} post={post} />;
                 </Link>
               );

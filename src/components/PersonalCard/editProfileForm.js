@@ -2,10 +2,8 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import Form from "react-bootstrap/Form";
-import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import Image from "react-bootstrap/Image";
 
 import MiniProfilePic from "./miniProfilePic";
 import { selectUser } from "../../store/user/selectors";
