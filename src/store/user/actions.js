@@ -14,6 +14,9 @@ export const LOG_OUT = "LOG_OUT";
 export const NEW_POST_SUCCESS = "NEW_POST_SUCCESS";
 export const EDIT_PROFILE_SUCCESS = "EDIT_PROFILE_SUCCESS";
 export const UPDATE_PROFILE_PIC_SUCCESS = "UPDATE_PROFILE_PIC_SUCCESS";
+export const LIKE_A_POST_SUCCESS = "LIKE_A_POST_SUCCESS";
+export const UNLIKE_A_POST_SUCCESS = "UNLIKE_A_POST_SUCCESS";
+
 const loginSuccess = (userWithToken) => {
   return {
     type: LOGIN_SUCCESS,
@@ -98,7 +101,7 @@ export const getUserWithStoredToken = () => {
 
       // token is still valid
       dispatch(tokenStillValid(response.data));
-      // console.log("response", response.data);
+      console.log("response", response.data);
       dispatch(appDoneLoading());
     } catch (error) {
       if (error.response) {
@@ -113,7 +116,7 @@ export const getUserWithStoredToken = () => {
     }
   };
 };
-
+// upload new post
 export const postSuccess = (newPost) => ({
   type: NEW_POST_SUCCESS,
   payload: newPost,
@@ -144,7 +147,7 @@ export const uploadNewPost = (imageURL, caption) => {
     }
   };
 };
-
+// edit profile info
 export const editProfileSuccess = (user) => ({
   type: EDIT_PROFILE_SUCCESS,
   payload: user,
@@ -179,7 +182,7 @@ export const editProfile = (name, description) => {
     }
   };
 };
-
+// Update profile pic
 export const updateProfilePicSuccess = (user) => ({
   type: UPDATE_PROFILE_PIC_SUCCESS,
   payload: user,
@@ -207,6 +210,74 @@ export const updateProfilePic = (profile_pic) => {
         showMessageWithTimeout("success", false, "edit successfull", 3000)
       );
       dispatch(updateProfilePicSuccess(response.data));
+      dispatch(appDoneLoading());
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
+};
+// like a post
+const likeAPostSuccess = (post) => ({
+  type: LIKE_A_POST_SUCCESS,
+  payload: post,
+});
+
+export const likeAPost = (postId) => {
+  return async (dispatch, getState) => {
+    try {
+      const { token, id } = selectUser(getState());
+      console.log("token", token);
+      dispatch(appLoading());
+
+      const response = await axios.post(
+        `${apiUrl}/post/${postId}/like`,
+        {
+          userId: id,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      dispatch(
+        showMessageWithTimeout("success", false, "like successfull", 3000)
+      );
+      dispatch(likeAPostSuccess(response.data));
+      dispatch(appDoneLoading());
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
+};
+
+// unlike a post
+const unlikeAPostSuccess = (post) => ({
+  type: UNLIKE_A_POST_SUCCESS,
+  payload: post,
+});
+
+export const unlikeAPost = (postId) => {
+  return async (dispatch, getState) => {
+    try {
+      const { token, id } = selectUser(getState());
+      dispatch(appLoading());
+
+      const response = await axios.post(
+        `${apiUrl}/post/${postId}/unlike`,
+        {
+          userId: id,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      dispatch(
+        showMessageWithTimeout("success", false, "unlike successfull", 3000)
+      );
+      dispatch(unlikeAPostSuccess(response.data));
       dispatch(appDoneLoading());
     } catch (error) {
       console.log("error", error);

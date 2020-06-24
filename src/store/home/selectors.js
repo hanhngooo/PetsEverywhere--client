@@ -1,1 +1,1 @@
-export const selectAllPosts = (state) => state.home;
+export const selectAllPosts = (state) => state.home.posts;

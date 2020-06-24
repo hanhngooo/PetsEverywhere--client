@@ -21,6 +21,12 @@ const PostDetail = () => (
   </Jumbotron>
 );
 
+const ProfileById = () => (
+  <Jumbotron>
+    <h1>Profile by id</h1>
+  </Jumbotron>
+);
+
 function App() {
   const dispatch = useDispatch();
   const isLoading = useSelector(selectAppLoading);
@@ -41,6 +47,7 @@ function App() {
         <Route path="/signUp" component={SignUp} />
         <Route path="/login" component={Login} />
         <Route path="/post/:id" component={PostDetail} />
+        <Route path="/user/:id" component={ProfileById} />
       </Switch>
     </div>
   );
