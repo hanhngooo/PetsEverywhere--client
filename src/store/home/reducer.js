@@ -13,10 +13,10 @@ export default (state = initialState, action) => {
     case LIKE_A_POST_SUCCESS:
     case UNLIKE_A_POST_SUCCESS:
       let index = state.posts.findIndex(
-        (post) => post.id === action.payload.postId
+        (post) => post.id === action.payload.id
       );
       state.posts[index] = action.payload;
-      return { ...state };
+      return { ...state, ...(state.posts[index] = action.payload) };
     default:
       return state;
   }

@@ -9,14 +9,14 @@ import Upload from "../../components/UploadCard";
 import ShortPostCard from "../../components/ShortPostCard";
 import PersonalCard from "../../components/PersonalCard";
 import ProfilePic from "../../components/PersonalCard/profilePic";
-// import Loading from "../../components/Loading";
 import { selectUser } from "../../store/user/selectors";
+import { selectPosts } from "../../store/profile/selectors";
 import { fetchPostByUserId } from "../../store/profile/actions";
 
 function Profile() {
   const dispatch = useDispatch();
-  const { name, description, profile_pic, posts, id } = useSelector(selectUser);
-
+  const { name, description, profile_pic, id } = useSelector(selectUser);
+  const posts = useSelector(selectPosts);
   useEffect(() => {
     dispatch(fetchPostByUserId(id));
   }, [dispatch, id]);

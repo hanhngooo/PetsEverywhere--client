@@ -12,7 +12,6 @@ export const fetchAllPosts = () => {
   return async (dispatch, getState) => {
     try {
       const response = await axios.get(`${apiUrl}/posts/all`);
-      console.log("all posts", response.data);
       dispatch(fetchPostsSuccess(response.data));
     } catch (error) {
       console.log("error", error);

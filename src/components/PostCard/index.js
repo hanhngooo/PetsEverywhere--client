@@ -83,6 +83,7 @@ export default function PostCard(props) {
         {likeButton()}
         <Card.Text>{props.post.likes_num} likes</Card.Text>
         <Card.Text>{props.post.comments_num} comments</Card.Text>
+        <Card.Text>{props.post.caption}</Card.Text>
       </CloudinaryContext>
     </Card>
   );

@@ -101,7 +101,6 @@ export const getUserWithStoredToken = () => {
 
       // token is still valid
       dispatch(tokenStillValid(response.data));
-      console.log("response", response.data);
       dispatch(appDoneLoading());
     } catch (error) {
       if (error.response) {
@@ -138,7 +137,6 @@ export const uploadNewPost = (imageURL, caption) => {
           },
         }
       );
-      console.log("responsed data", response.data);
 
       dispatch(showMessageWithTimeout("success", false, "Updated new post"));
       dispatch(postSuccess(response.data));
@@ -157,7 +155,6 @@ export const editProfile = (name, description) => {
   return async (dispatch, getState) => {
     try {
       const { token, id } = selectUser(getState());
-      dispatch(appLoading());
 
       const response = await axios.patch(
         `${apiUrl}/${id}`,
@@ -192,7 +189,6 @@ export const updateProfilePic = (profile_pic) => {
   return async (dispatch, getState) => {
     try {
       const { token, id } = selectUser(getState());
-      dispatch(appLoading());
 
       const response = await axios.patch(
         `${apiUrl}/${id}/profilePic`,
@@ -226,8 +222,6 @@ export const likeAPost = (postId) => {
   return async (dispatch, getState) => {
     try {
       const { token, id } = selectUser(getState());
-      console.log("token", token);
-      dispatch(appLoading());
 
       const response = await axios.post(
         `${apiUrl}/post/${postId}/like`,
@@ -240,10 +234,7 @@ export const likeAPost = (postId) => {
           },
         }
       );
-      dispatch(
-        showMessageWithTimeout("success", false, "like successfull", 3000)
-      );
-      dispatch(likeAPostSuccess(response.data));
+      dispatch(likeAPostSuccess(response.data.post));
       dispatch(appDoneLoading());
     } catch (error) {
       console.log("error", error);
@@ -261,7 +252,6 @@ export const unlikeAPost = (postId) => {
   return async (dispatch, getState) => {
     try {
       const { token, id } = selectUser(getState());
-      dispatch(appLoading());
 
       const response = await axios.post(
         `${apiUrl}/post/${postId}/unlike`,
@@ -274,10 +264,7 @@ export const unlikeAPost = (postId) => {
           },
         }
       );
-      dispatch(
-        showMessageWithTimeout("success", false, "unlike successfull", 3000)
-      );
-      dispatch(unlikeAPostSuccess(response.data));
+      dispatch(unlikeAPostSuccess(response.data.post));
       dispatch(appDoneLoading());
     } catch (error) {
       console.log("error", error);
