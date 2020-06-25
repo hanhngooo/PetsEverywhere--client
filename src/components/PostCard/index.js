@@ -4,10 +4,15 @@ import { Image, CloudinaryContext } from "cloudinary-react";
 import { useDispatch } from "react-redux";
 
 import Card from "react-bootstrap/Card";
-// import Button from "react-bootstrap/Button";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
+import Form from "react-bootstrap/Form";
+import InputGroup from "react-bootstrap/InputGroup";
+import Button from "react-bootstrap/Button";
+import Col from "react-bootstrap/Col";
 
 import MiniProfilePic from "../PersonalCard/miniProfilePic";
+import Comments from "../Comments/index";
+import CommentForm from "../Comments/commentForm";
 import { likeAPost, unlikeAPost } from "../../store/user/actions";
 
 export default function PostCard(props) {
@@ -84,6 +89,8 @@ export default function PostCard(props) {
         <Card.Text>{props.post.likes_num} likes</Card.Text>
         <Card.Text>{props.post.comments_num} comments</Card.Text>
         <Card.Text>{props.post.caption}</Card.Text>
+        <Comments comments={props.post.comments} />
+        <CommentForm />
       </CloudinaryContext>
     </Card>
   );

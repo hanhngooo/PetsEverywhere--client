@@ -90,8 +90,6 @@ export const getUserWithStoredToken = () => {
 
     // if we have no token, stop
     if (token === null) return;
-
-    dispatch(appLoading());
     try {
       // if we do have a token,
       // check wether it is still valid or if it is expired

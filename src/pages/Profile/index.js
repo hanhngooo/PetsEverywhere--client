@@ -10,17 +10,15 @@ import ShortPostCard from "../../components/ShortPostCard";
 import PersonalCard from "../../components/PersonalCard";
 import ProfilePic from "../../components/PersonalCard/profilePic";
 import { selectUser } from "../../store/user/selectors";
-import { selectPosts } from "../../store/profile/selectors";
-import { fetchPostByUserId } from "../../store/profile/actions";
+import { getUserWithStoredToken } from "../../store/user/actions";
 
 function Profile() {
   const dispatch = useDispatch();
-  const { name, description, profile_pic, id } = useSelector(selectUser);
-  const posts = useSelector(selectPosts);
-  useEffect(() => {
-    dispatch(fetchPostByUserId(id));
-  }, [dispatch, id]);
+  const { name, description, profile_pic, posts } = useSelector(selectUser);
 
+  useEffect(() => {
+    dispatch(getUserWithStoredToken());
+  }, [dispatch]);
   return (
     <Container>
       <CardColumns className="mt-2">
