@@ -6,13 +6,12 @@ import { useSelector } from "react-redux";
 import { selectToken } from "../../store/user/selectors";
 import NavbarItem from "./NavbarItem";
 import LoggedIn from "./LoggedIn";
-import LoggedOut from "./LoggedOut";
 import logo from "../../assets/logo2.png";
 
 export default function Navigation() {
   const token = useSelector(selectToken);
 
-  const loginLogoutControls = token ? <LoggedIn /> : <LoggedOut />;
+  const loginLogoutControls = token ? <LoggedIn /> : null;
 
   return (
     <Navbar bg="dark" variant="dark">
