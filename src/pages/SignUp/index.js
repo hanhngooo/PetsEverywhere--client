@@ -7,6 +7,7 @@ import { selectToken } from "../../store/user/selectors";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
 import { Col } from "react-bootstrap";
+import logo from "../../assets/logo3.png";
 
 export default function SignUp() {
   const [name, setName] = useState("");
@@ -34,6 +35,9 @@ export default function SignUp() {
 
   return (
     <Container>
+      <Container style={{ textAlign: "center" }}>
+        <img src={logo} alt="logo" />
+      </Container>
       <Form as={Col} md={{ span: 6, offset: 3 }} className="mt-5">
         <h1 className="mt-5 mb-5">Signup</h1>
         <Form.Group controlId="formBasicName">
@@ -55,9 +59,6 @@ export default function SignUp() {
             placeholder="Enter email"
             required
           />
-          <Form.Text className="text-muted">
-            We'll never share your email with anyone else.
-          </Form.Text>
         </Form.Group>
 
         <Form.Group controlId="formBasicPassword">
@@ -71,7 +72,7 @@ export default function SignUp() {
           />
         </Form.Group>
         <Form.Group className="mt-5">
-          <Button variant="primary" type="submit" onClick={submitForm}>
+          <Button variant="info" type="submit" onClick={submitForm}>
             Sign up
           </Button>
         </Form.Group>

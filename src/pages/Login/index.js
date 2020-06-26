@@ -7,7 +7,7 @@ import { selectToken } from "../../store/user/selectors";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
 import { Col } from "react-bootstrap";
-
+import logo from "../../assets/logo3.png";
 export default function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -32,7 +32,10 @@ export default function SignUp() {
   }
 
   return (
-    <Container>
+    <Container className="loginPage">
+      <Container style={{ textAlign: "center" }}>
+        <img src={logo} alt="logo" />
+      </Container>
       <Form as={Col} md={{ span: 6, offset: 3 }} className="mt-5">
         <h1 className="mt-5 mb-5">Login</h1>
         <Form.Group controlId="formBasicEmail">
@@ -57,7 +60,7 @@ export default function SignUp() {
           />
         </Form.Group>
         <Form.Group className="mt-5">
-          <Button variant="primary" type="submit" onClick={submitForm}>
+          <Button variant="info" type="submit" onClick={submitForm}>
             Log in
           </Button>
         </Form.Group>

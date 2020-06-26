@@ -37,7 +37,9 @@ function Upload() {
   };
   return (
     <div>
-      <Button onClick={() => setShowModal(true)}>New Post</Button>
+      <Button variant="info" onClick={() => setShowModal(true)}>
+        New Post
+      </Button>
       <Modal size="lg" show={showModal} onHide={() => setShowModal(false)}>
         <Modal.Header closeButton>
           Upload a cute photo of your pet!
@@ -71,10 +73,10 @@ function Upload() {
           )}
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShowModal(false)}>
+          <Button variant="info" onClick={() => setShowModal(false)}>
             Close
           </Button>
-          <Button variant="primary" onClick={uploadFile}>
+          <Button variant="info" onClick={uploadFile}>
             Upload
           </Button>
         </Modal.Footer>

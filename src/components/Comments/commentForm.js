@@ -30,7 +30,7 @@ export default function CommentForm(props) {
         />
       </Form.Group>
       <Form.Group>
-        <Button variant="primary" type="submit" onClick={addComment}>
+        <Button variant="info" type="submit" onClick={addComment}>
           Post
         </Button>
       </Form.Group>

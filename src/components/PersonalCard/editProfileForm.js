@@ -41,13 +41,19 @@ export default function EditProfileForm() {
   }
   return (
     <div>
-      <Button onClick={onClickEdit}>Edit Profile</Button>
+      <Button variant="info" onClick={onClickEdit}>
+        Edit Profile
+      </Button>
       <Modal size="lg" show={showModal} onHide={() => setShowModal(false)}>
-        <Modal.Header closeButton>Edit Your Profile</Modal.Header>
+        <Modal.Header closeButton>
+          <h4>Edit Your Profile</h4>
+        </Modal.Header>
         <Modal.Body>
           <Form>
             <Form.Group controlId="formBasicName">
-              <Form.Label>Profile Picture</Form.Label>
+              <Form.Label>
+                <strong>Profile Picture</strong>
+              </Form.Label>
               <MiniProfilePic profile_pic={profile_pic} />
               <Form.Control
                 value={profilePicInput}
@@ -57,7 +63,9 @@ export default function EditProfileForm() {
               />
             </Form.Group>
             <Form.Group controlId="formBasicName">
-              <Form.Label>Name</Form.Label>
+              <Form.Label>
+                <strong>Name</strong>
+              </Form.Label>
               <Form.Control
                 value={newName}
                 onChange={(event) => setNewName(event.target.value)}
@@ -65,7 +73,9 @@ export default function EditProfileForm() {
               />
             </Form.Group>
             <Form.Group controlId="formBasicName">
-              <Form.Label>Description</Form.Label>
+              <Form.Label>
+                <strong>Description</strong>
+              </Form.Label>
               <Form.Control
                 value={descriptionInput}
                 onChange={(event) => setDescriptionInput(event.target.value)}
@@ -78,7 +88,7 @@ export default function EditProfileForm() {
           <Button variant="secondary" onClick={() => setShowModal(false)}>
             Close
           </Button>
-          <Button variant="primary" onClick={updateProfile}>
+          <Button variant="info" onClick={updateProfile}>
             Save
           </Button>
         </Modal.Footer>

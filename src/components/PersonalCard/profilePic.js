@@ -4,7 +4,11 @@ import { Image, CloudinaryContext, Transformation } from "cloudinary-react";
 export default function ProfilePic(props) {
   return (
     <CloudinaryContext>
-      <Image cloudName="hanhngo" publicId={props.profile_pic}>
+      <Image
+        cloudName="hanhngo"
+        publicId={props.profile_pic}
+        style={{ padding: "1rem" }}
+      >
         <Transformation
           gravity="face:auto"
           width="200"
