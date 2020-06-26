@@ -5,6 +5,8 @@ import {
   NEW_POST_SUCCESS,
   EDIT_PROFILE_SUCCESS,
   UPDATE_PROFILE_PIC_SUCCESS,
+  LIKE_A_POST_SUCCESS,
+  UNLIKE_A_POST_SUCCESS,
 } from "./actions";
 
 const initialState = {
@@ -14,6 +16,7 @@ const initialState = {
   name: null,
   email: null,
   posts: [],
+  likes: [],
 };
 
 export default (state = initialState, action) => {
@@ -37,6 +40,20 @@ export default (state = initialState, action) => {
 
     case UPDATE_PROFILE_PIC_SUCCESS:
       return { ...state, ...action.payload };
+
+    case LIKE_A_POST_SUCCESS:
+      return {
+        ...state,
+        likes: [
+          ...state.likes,
+          { userId: state.id, postId: action.payload.id },
+        ],
+      };
+    case UNLIKE_A_POST_SUCCESS:
+      return {
+        ...state,
+        likes: state.likes.filter((like) => like.postId !== action.payload.id),
+      };
 
     default:
       return state;

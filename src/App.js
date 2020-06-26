@@ -1,4 +1,6 @@
 import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
 import "./App.css";
 import { Jumbotron } from "react-bootstrap";
 import { Switch, Route } from "react-router-dom";
@@ -8,19 +10,20 @@ import MessageBox from "./components/MessageBox";
 import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
-import { useDispatch, useSelector } from "react-redux";
+import Home from "./pages/Home";
 import { selectAppLoading } from "./store/appState/selectors";
 import { getUserWithStoredToken } from "./store/user/actions";
 import { selectToken } from "./store/user/selectors";
 
-const Home = () => (
-  <Jumbotron>
-    <h1>Home</h1>
-  </Jumbotron>
-);
 const PostDetail = () => (
   <Jumbotron>
     <h1>Post Detail</h1>
+  </Jumbotron>
+);
+
+const ProfileById = () => (
+  <Jumbotron>
+    <h1>Profile by id</h1>
   </Jumbotron>
 );
 
@@ -44,6 +47,7 @@ function App() {
         <Route path="/signUp" component={SignUp} />
         <Route path="/login" component={Login} />
         <Route path="/post/:id" component={PostDetail} />
+        <Route path="/user/:id" component={ProfileById} />
       </Switch>
     </div>
   );

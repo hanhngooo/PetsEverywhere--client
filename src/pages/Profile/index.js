@@ -9,18 +9,16 @@ import Upload from "../../components/UploadCard";
 import ShortPostCard from "../../components/ShortPostCard";
 import PersonalCard from "../../components/PersonalCard";
 import ProfilePic from "../../components/PersonalCard/profilePic";
-// import Loading from "../../components/Loading";
 import { selectUser } from "../../store/user/selectors";
-import { fetchPostByUserId } from "../../store/profile/actions";
+import { getUserWithStoredToken } from "../../store/user/actions";
 
 function Profile() {
   const dispatch = useDispatch();
-  const { name, description, profile_pic, posts, id } = useSelector(selectUser);
+  const { name, description, profile_pic, posts } = useSelector(selectUser);
 
   useEffect(() => {
-    dispatch(fetchPostByUserId(id));
-  }, [dispatch, id]);
-
+    dispatch(getUserWithStoredToken());
+  }, [dispatch]);
   return (
     <Container>
       <CardColumns className="mt-2">
@@ -38,7 +36,7 @@ function Profile() {
           {posts &&
             posts.map((post, index) => {
               return (
-                <Link to={`/post/${post.id}`}>
+                <Link to={`/post/${post.id}`} key={index}>
                   <ShortPostCard key={index} post={post} />;
                 </Link>
               );
