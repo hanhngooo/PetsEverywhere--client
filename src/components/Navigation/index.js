@@ -6,23 +6,31 @@ import { useSelector } from "react-redux";
 import { selectToken } from "../../store/user/selectors";
 import NavbarItem from "./NavbarItem";
 import LoggedIn from "./LoggedIn";
-import LoggedOut from "./LoggedOut";
+import logo from "../../assets/logo2.png";
 
 export default function Navigation() {
   const token = useSelector(selectToken);
 
-  const loginLogoutControls = token ? <LoggedIn /> : <LoggedOut />;
+  const loginLogoutControls = token ? <LoggedIn /> : null;
 
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar bg="dark" variant="dark">
       <Navbar.Brand as={NavLink} to="/">
-        PETSEVERYWHERE
+        <img src={logo} alt="logo" width="350" />
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
-        <Nav style={{ width: "100%" }} fill>
-          {token ? <NavbarItem path="/" linkText="Home" /> : null}
-          {token ? <NavbarItem path="/profile" linkText="Profile" /> : null}
+        <Nav style={{ width: "90%" }} fill>
+          {token ? (
+            <NavbarItem className="navBarItem" path="/" linkText="Home" />
+          ) : null}
+          {token ? (
+            <NavbarItem
+              className="navBarItem"
+              path="/profile"
+              linkText="Profile"
+            />
+          ) : null}
           {loginLogoutControls}
         </Nav>
       </Navbar.Collapse>

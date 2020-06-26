@@ -60,13 +60,16 @@ export default function PostCard(props) {
     }
   }
   return (
-    <Card style={{ width: "40.03rem", margin: "5rem" }}>
+    <Card className="mx-auto" style={{ width: "40.03rem", margin: "5rem" }}>
       <CloudinaryContext key={props.post.id}>
         <Link
           to={`/user/${props.post.userId}`}
-          style={{ textDecoration: "none", color: "black" }}
+          style={{
+            textDecoration: "none",
+            color: "black",
+          }}
         >
-          <Container>
+          <Container style={{ padding: "1rem 1rem " }}>
             <MiniProfilePic profile_pic={props.post.user.profile_pic} />
 
             <Card.Text style={{ fontWeight: "bold" }}>
@@ -88,7 +91,7 @@ export default function PostCard(props) {
           })}
 
         <Container>
-          <Row>
+          <Row style={{ padding: "1rem 1rem " }}>
             <Col>
               {likeButton()} {props.post.likes_num} likes
             </Col>
@@ -97,7 +100,9 @@ export default function PostCard(props) {
             </Col>
           </Row>
         </Container>
-        <Card.Text>{props.post.caption}</Card.Text>
+        <Card.Text style={{ padding: "1rem 1rem " }}>
+          {props.post.caption}
+        </Card.Text>
         <Comments comments={props.post.comments} />
         <CommentForm postId={props.post.id} />
       </CloudinaryContext>

@@ -11,6 +11,7 @@ import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import Home from "./pages/Home";
+
 import { selectAppLoading } from "./store/appState/selectors";
 import { getUserWithStoredToken } from "./store/user/actions";
 import { selectToken } from "./store/user/selectors";
@@ -20,13 +21,11 @@ const PostDetail = () => (
     <h1>Post Detail</h1>
   </Jumbotron>
 );
-
 const ProfileById = () => (
   <Jumbotron>
     <h1>Profile by id</h1>
   </Jumbotron>
 );
-
 function App() {
   const dispatch = useDispatch();
   const isLoading = useSelector(selectAppLoading);
@@ -42,10 +41,10 @@ function App() {
       <MessageBox />
       {isLoading ? <Loading /> : null}
       <Switch>
-        {token ? <Route exact path="/" component={Home} /> : null}
+        {token ? <Route exact path="/home" component={Home} /> : null}
         {token ? <Route path="/profile" component={Profile} /> : null}
         <Route path="/signUp" component={SignUp} />
-        <Route path="/login" component={Login} />
+        <Route path="/" component={Login} />
         <Route path="/post/:id" component={PostDetail} />
         <Route path="/user/:id" component={ProfileById} />
       </Switch>

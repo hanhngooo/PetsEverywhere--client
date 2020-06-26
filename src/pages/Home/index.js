@@ -14,7 +14,7 @@ export default function Home() {
   }, [dispatch]);
 
   return (
-    <div>
+    <div className="App-body">
       {allPosts &&
         allPosts.map((post, index) => {
           return <PostCard key={index} post={post} user={user} />;

@@ -13,10 +13,14 @@ export default function LoggedIn() {
   return (
     <>
       <CardColumns className="mt-2">
-        <MiniProfilePic profile_pic={user.profile_pic} />
-        <Nav.Item style={{ padding: ".5rem .5rem" }}>{user.name}</Nav.Item>
+        <Nav.Item>
+          <MiniProfilePic profile_pic={user.profile_pic} />
+        </Nav.Item>
+        <Nav.Item style={{ color: "white" }}>{user.name}</Nav.Item>
       </CardColumns>
-      <Button onClick={() => dispatch(logOut())}>Logout</Button>
+      <Button variant="info" onClick={() => dispatch(logOut())}>
+        Logout
+      </Button>
     </>
   );
 }
