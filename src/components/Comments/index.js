@@ -14,7 +14,7 @@ export default function Comments(props) {
         {props.comments &&
           props.comments.map((comment) => {
             return (
-              <Fragment>
+              <Fragment key={comment.id}>
                 <Accordion.Collapse key={comment.id} eventKey="1">
                   <Card.Body>
                     <MiniProfilePic profile_pic={comment.user.profile_pic} />{" "}

@@ -4,12 +4,12 @@ import { Image, CloudinaryContext } from "cloudinary-react";
 import { useDispatch } from "react-redux";
 
 import Card from "react-bootstrap/Card";
-import { FaHeart, FaRegHeart } from "react-icons/fa";
-import Form from "react-bootstrap/Form";
-import InputGroup from "react-bootstrap/InputGroup";
-import Button from "react-bootstrap/Button";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
+import { FaHeart, FaRegHeart } from "react-icons/fa";
+import { MdComment } from "react-icons/md";
 import MiniProfilePic from "../PersonalCard/miniProfilePic";
 import Comments from "../Comments/index";
 import CommentForm from "../Comments/commentForm";
@@ -59,7 +59,6 @@ export default function PostCard(props) {
       );
     }
   }
-
   return (
     <Card style={{ width: "40.03rem", margin: "5rem" }}>
       <CloudinaryContext key={props.post.id}>
@@ -67,11 +66,13 @@ export default function PostCard(props) {
           to={`/user/${props.post.userId}`}
           style={{ textDecoration: "none", color: "black" }}
         >
-          <MiniProfilePic profile_pic={props.post.user.profile_pic} />
+          <Container>
+            <MiniProfilePic profile_pic={props.post.user.profile_pic} />
 
-          <Card.Text style={{ fontWeight: "bold" }}>
-            {props.post.user.name}
-          </Card.Text>
+            <Card.Text style={{ fontWeight: "bold" }}>
+              {props.post.user.name}
+            </Card.Text>
+          </Container>
         </Link>
         {props.post.images &&
           props.post.images.map((image) => {
@@ -85,12 +86,20 @@ export default function PostCard(props) {
               />
             );
           })}
-        {likeButton()}
-        <Card.Text>{props.post.likes_num} likes</Card.Text>
-        <Card.Text>{props.post.comments_num} comments</Card.Text>
+
+        <Container>
+          <Row>
+            <Col>
+              {likeButton()} {props.post.likes_num} likes
+            </Col>
+            <Col>
+              <MdComment /> {props.post.comments_num} comments
+            </Col>
+          </Row>
+        </Container>
         <Card.Text>{props.post.caption}</Card.Text>
         <Comments comments={props.post.comments} />
-        <CommentForm />
+        <CommentForm postId={props.post.id} />
       </CloudinaryContext>
     </Card>
   );
