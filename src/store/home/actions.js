@@ -25,24 +25,7 @@ export const fetchAllPosts = () => {
     }
   };
 };
-// Fetch one post
-export const FETCH_A_POST_SUCCESS = "FETCH_A_POST_SUCCESS";
 
-const fetchAPostSuccess = (post) => ({
-  type: FETCH_A_POST_SUCCESS,
-  payload: post,
-});
-
-export const fetchAPost = (id) => {
-  return async (dispatch, getState) => {
-    try {
-      const response = await axios.get(`${apiUrl}/posts/${id}`);
-      dispatch(fetchAPostSuccess(response.data));
-    } catch (error) {
-      console.log("error", error);
-    }
-  };
-};
 // Add new comment
 export const addCommentSuccess = (comment) => ({
   type: ADD_A_COMMENT,
