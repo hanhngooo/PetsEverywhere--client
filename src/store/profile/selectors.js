@@ -1,1 +1,1 @@
-export const selectPosts = (state) => state.profile.posts;
+export const selectUserById = (state) => state.profile;

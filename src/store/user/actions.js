@@ -33,6 +33,7 @@ export const logOut = () => ({ type: LOG_OUT });
 
 export const signUp = (name, email, password) => {
   return async (dispatch, getState) => {
+    console.log("do you go here");
     dispatch(appLoading());
     try {
       const response = await axios.post(`${apiUrl}/signup`, {

@@ -11,9 +11,9 @@ export default function ShortPostCard(props) {
         {props.post.images &&
           props.post.images.map((image) => {
             return (
-              <MDBCol md="4" style={{ padding: "1rem" }}>
+              <MDBCol key={image.id} md="4" style={{ padding: "1rem" }}>
                 <MDBView>
-                  <CloudinaryContext key={image.id}>
+                  <CloudinaryContext>
                     <Image
                       cloudName="hanhngo"
                       publicId={image.public_Id}
