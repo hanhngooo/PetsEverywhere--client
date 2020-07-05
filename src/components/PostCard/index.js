@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Image, CloudinaryContext } from "cloudinary-react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import Card from "react-bootstrap/Card";
 import Container from "react-bootstrap/Container";
@@ -13,10 +13,12 @@ import { MdComment } from "react-icons/md";
 import MiniProfilePic from "../PersonalCard/miniProfilePic";
 import Comments from "../Comments/index";
 import CommentForm from "../Comments/commentForm";
+import { selectUser } from "../../store/user/selectors";
 import { likeAPost, unlikeAPost } from "../../store/user/actions";
 
 export default function PostCard(props) {
   const dispatch = useDispatch();
+  const loggedInUserId = useSelector(selectUser).id;
 
   function checkLikedPost() {
     if (
@@ -63,7 +65,11 @@ export default function PostCard(props) {
     <Card className="mx-auto" style={{ width: "40.03rem", margin: "5rem" }}>
       <CloudinaryContext key={props.post.id}>
         <Link
-          to={`/user/${props.post.userId}`}
+          to={
+            loggedInUserId !== props.post.userId
+              ? `/user/${props.post.userId}`
+              : `/profile`
+          }
           style={{
             textDecoration: "none",
             color: "black",

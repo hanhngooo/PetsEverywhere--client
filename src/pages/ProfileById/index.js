@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import Container from "react-bootstrap/Container";
 import CardColumns from "react-bootstrap/CardColumns";
@@ -10,15 +11,18 @@ import ShortPostCard from "../../components/ShortPostCard";
 import PersonalCard from "../../components/PersonalCard";
 import ProfilePic from "../../components/PersonalCard/profilePic";
 import { selectUser } from "../../store/user/selectors";
-import { getUserWithStoredToken } from "../../store/user/actions";
+import { selectUserById } from "../../store/profile/selectors";
+import { fetchUserById } from "../../store/profile/actions";
 
-function Profile() {
+function ProfileById() {
+  const profileId = parseInt(useParams().id);
   const dispatch = useDispatch();
-  const { id, name, description, profile_pic, posts } = useSelector(selectUser);
+  const { name, description, profile_pic, posts } = useSelector(selectUserById);
+  const loggedInUserId = useSelector(selectUser).id;
 
   useEffect(() => {
-    dispatch(getUserWithStoredToken());
-  }, [dispatch]);
+    dispatch(fetchUserById(profileId));
+  }, [dispatch, profileId]);
   return (
     <Container>
       <CardColumns className="mt-2">
@@ -27,18 +31,16 @@ function Profile() {
           profile_pic={profile_pic}
           name={name}
           description={description}
-          posts={posts.length}
-          id={id}
+          posts={posts && posts.length}
         />
       </CardColumns>
       <Container>
-        <Upload />
         <CardColumns className="mt-3">
           {posts &&
             posts.map((post, index) => {
               return (
                 <Link to={`/post/${post.id}`} key={index}>
-                  <ShortPostCard key={index} post={post} />
+                  <ShortPostCard key={post.id} post={post} />
                 </Link>
               );
             })}
@@ -48,4 +50,4 @@ function Profile() {
   );
 }
 
-export default Profile;
+export default ProfileById;
