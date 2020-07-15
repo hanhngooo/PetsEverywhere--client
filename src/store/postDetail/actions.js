@@ -12,9 +12,11 @@ const fetchAPostSuccess = (post) => ({
 
 export const fetchAPost = (id) => {
   return async (dispatch, getState) => {
-    dispatch(appLoading());
+    // dispatch(appLoading());
+
     try {
       const response = await axios.get(`${apiUrl}/post/${id}`);
+      console.log("fetched Post", response.data);
       dispatch(fetchAPostSuccess(response.data));
       dispatch(appDoneLoading());
     } catch (error) {
