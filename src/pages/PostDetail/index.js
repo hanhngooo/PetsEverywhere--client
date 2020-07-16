@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory, useParams, Link } from "react-router-dom";
 import { Image, CloudinaryContext } from "cloudinary-react";
-import { Row, Col, Container, Modal } from "react-bootstrap";
+import { Row, Col, Container, Modal, Button } from "react-bootstrap";
 import "./style.css";
 import { AiOutlineClose } from "react-icons/ai";
 import { MdComment } from "react-icons/md";
@@ -78,10 +78,8 @@ export default function PostDetail() {
         dialogClassName="custom-modal"
       >
         <Modal.Body className="modal-body">
-          <button
-            style={{ border: "none", background: "none" }}
-            name="close-modal"
-            onClick={back}
+          <Link
+            to={user.id !== post.userId ? `/user/${post.userId}` : `/profile`}
           >
             <AiOutlineClose
               style={{
@@ -89,8 +87,9 @@ export default function PostDetail() {
                 right: 10,
                 top: 10,
               }}
+              onClick={back}
             />
-          </button>
+          </Link>
           <Container className="modal-container">
             <Row>
               <Col xs={12} md={8}>
@@ -136,7 +135,10 @@ export default function PostDetail() {
                   {post.comments &&
                     post.comments.map((comment) => {
                       return (
-                        <Container className="comment-container">
+                        <Container
+                          className="comment-container"
+                          key={comment.id}
+                        >
                           <Row>
                             <Col xs={2}>
                               <MiniProfilePic
