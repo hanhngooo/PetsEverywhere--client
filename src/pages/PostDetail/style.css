@@ -1,0 +1,15 @@
+.custom-modal {
+  max-width: 90vw !important;
+}
+.modal-container {
+  padding-bottom: 1rem;
+}
+.caption-card {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+.comment-container {
+  padding-top: 1rem;
+  padding-left: 0rem;
+  padding-right: 0rem;
+}
