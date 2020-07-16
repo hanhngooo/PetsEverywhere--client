@@ -6,10 +6,14 @@ import { Row, Col, Container, Modal } from "react-bootstrap";
 import "./style.css";
 import { AiOutlineClose } from "react-icons/ai";
 import { MdComment } from "react-icons/md";
+import { FaHeart, FaRegHeart } from "react-icons/fa";
 
 import MiniProfilePic from "../../components/PersonalCard/miniProfilePic";
+import CommentForm from "../../components/Comments/commentForm";
 import { fetchAPost } from "../../store/postDetail/actions";
 import { selectPostById } from "../../store/postDetail/selectors";
+import { likeAPost, unlikeAPost } from "../../store/user/actions";
+import { selectUser } from "../../store/user/selectors";
 
 export default function PostDetail() {
   let history = useHistory();
@@ -17,7 +21,8 @@ export default function PostDetail() {
   const [showModal, setShowModal] = useState(true);
   const dispatch = useDispatch();
   const post = useSelector(selectPostById);
-  console.log("user posted this", post.user && post.user.name);
+  const user = useSelector(selectUser);
+
   useEffect(() => {
     dispatch(fetchAPost(postId));
   }, [dispatch, postId]);
@@ -27,6 +32,44 @@ export default function PostDetail() {
     history.goBack();
   };
 
+  function checkLikedPost() {
+    if (user.likes && user.likes.find((like) => like.postId === post.id)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  function onClickLikePost(postId) {
+    dispatch(likeAPost(postId));
+  }
+  function onClickUnLikePost(postId) {
+    dispatch(unlikeAPost(postId));
+  }
+
+  function likeButton() {
+    if (checkLikedPost()) {
+      return (
+        <button
+          style={{ border: "none", background: "none" }}
+          name="undo like"
+          onClick={() => onClickUnLikePost(postId)}
+        >
+          <FaHeart />
+        </button>
+      );
+    } else {
+      return (
+        <button
+          style={{ border: "none", background: "none" }}
+          name="undo like"
+          onClick={() => onClickLikePost(postId)}
+        >
+          <FaRegHeart />
+        </button>
+      );
+    }
+  }
   return (
     <div>
       <Modal
@@ -81,7 +124,10 @@ export default function PostDetail() {
                     <Col>{post.caption}</Col>
                   </Row>
                   <Row>
-                    <Col xs={3}>{post.likes_num} likes</Col>
+                    <Col xs={4}>
+                      {" "}
+                      {likeButton()} {post.likes_num} likes
+                    </Col>
                     <Col>
                       <MdComment /> {post.comments_num} comments
                     </Col>
@@ -111,6 +157,11 @@ export default function PostDetail() {
                       );
                     })}
                 </Container>
+                <Row className="comment-form">
+                  <Col xs={14}>
+                    <CommentForm postId={post.id} />
+                  </Col>
+                </Row>
               </Col>
             </Row>
           </Container>

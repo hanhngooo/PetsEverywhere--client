@@ -4,6 +4,9 @@
 .modal-container {
   padding-bottom: 1rem;
 }
+.post-detail {
+  position: relative;
+}
 .caption-card {
   padding-top: 1rem;
   padding-bottom: 1rem;
@@ -12,4 +15,8 @@
   padding-top: 1rem;
   padding-left: 0rem;
   padding-right: 0rem;
+}
+.comment-form {
+  position: absolute;
+  bottom: 0;
 }
