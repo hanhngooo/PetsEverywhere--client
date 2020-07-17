@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import Container from "react-bootstrap/Container";
 import CardColumns from "react-bootstrap/CardColumns";
@@ -13,6 +13,7 @@ import { selectUser } from "../../store/user/selectors";
 import { getUserWithStoredToken } from "../../store/user/actions";
 
 function Profile() {
+  let location = useLocation();
   const dispatch = useDispatch();
   const { id, name, description, profile_pic, posts } = useSelector(selectUser);
 
@@ -37,7 +38,13 @@ function Profile() {
           {posts &&
             posts.map((post, index) => {
               return (
-                <Link to={`/post/${post.id}`} key={index}>
+                <Link
+                  to={{
+                    pathname: `/post/${post.id}`,
+                    state: { background: location },
+                  }}
+                  key={index}
+                >
                   <ShortPostCard key={index} post={post} />
                 </Link>
               );
