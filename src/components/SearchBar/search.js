@@ -1,11 +1,13 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
 import { BsSearch } from "react-icons/bs";
+import { selectAllUsers } from "../../store/users/selectors";
 
 export default function Search() {
   const [searchName, setSearchName] = useState("");
-  console.log("search name", searchName);
+  const dispatch = useDispatch();
   const history = useHistory();
 
   function handleSearch() {
