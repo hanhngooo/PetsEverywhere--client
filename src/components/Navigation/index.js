@@ -4,6 +4,7 @@ import Nav from "react-bootstrap/Nav";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectToken } from "../../store/user/selectors";
+import Search from "../SearchBar/search";
 import NavbarItem from "./NavbarItem";
 import LoggedIn from "./LoggedIn";
 import logo from "../../assets/logo2.png";
@@ -21,6 +22,8 @@ export default function Navigation() {
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav style={{ width: "90%" }} fill>
+          {token && <Search />}
+
           {token ? (
             <NavbarItem className="navBarItem" path="/" linkText="Home" />
           ) : null}
