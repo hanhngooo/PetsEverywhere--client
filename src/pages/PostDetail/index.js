@@ -9,7 +9,7 @@ import { AiOutlineClose } from "react-icons/ai";
 import { MdComment } from "react-icons/md";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 
-import MiniProfilePic from "../../components/PersonalCard/miniProfilePic";
+import UserNameCard from "../../components/UserNameCard/userNameCard";
 import CommentForm from "../../components/Comments/commentForm";
 import { fetchAPost } from "../../store/postDetail/actions";
 import { selectPostById } from "../../store/postDetail/selectors";
@@ -112,12 +112,16 @@ export default function PostDetail() {
                 <Container>
                   <Row className="user-name-card">
                     <Col xs={2}>
-                      <MiniProfilePic
+                      {/* <MiniProfilePic
                         profile_pic={post.user && post.user.profile_pic}
+                      /> */}
+                      <UserNameCard
+                        profile_pic={post.user && post.user.profile_pic}
+                        name={post.user && post.user.name}
                       />
                     </Col>{" "}
                     <Col>
-                      <strong>{post.user && post.user.name}</strong>
+                      {/* <strong>{post.user && post.user.name}</strong> */}
                       <div className="post-date">
                         <i>{moment(post.createdAt).format("MMMM Do YYYY")}</i>
                       </div>
@@ -144,7 +148,7 @@ export default function PostDetail() {
                             key={comment.id}
                           >
                             <Row>
-                              <Col xs={2}>
+                              {/* <Col xs={2}>
                                 <MiniProfilePic
                                   profile_pic={
                                     comment.user && comment.user.profile_pic
@@ -155,6 +159,14 @@ export default function PostDetail() {
                                 <strong>
                                   {comment.user && comment.user.name}
                                 </strong>
+                              </Col> */}
+                              <Col>
+                                <UserNameCard
+                                  profile_pic={
+                                    comment.user && comment.user.profile_pic
+                                  }
+                                  name={comment.user && comment.user.name}
+                                />
                               </Col>
                               <Col className="comment-date">
                                 {moment(post.createdAt).format("MMMM Do YYYY")}

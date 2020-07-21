@@ -10,7 +10,7 @@ import Col from "react-bootstrap/Col";
 
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { MdComment } from "react-icons/md";
-import MiniProfilePic from "../PersonalCard/miniProfilePic";
+import UserNameCard from "../UserNameCard/userNameCard";
 import Comments from "../Comments/index";
 import CommentForm from "../Comments/commentForm";
 import { selectUser } from "../../store/user/selectors";
@@ -75,13 +75,20 @@ export default function PostCard(props) {
             color: "black",
           }}
         >
-          <Container style={{ padding: "1rem 1rem " }}>
-            <MiniProfilePic profile_pic={props.post.user.profile_pic} />
-
-            <Card.Text style={{ fontWeight: "bold" }}>
-              {props.post.user.name}
-            </Card.Text>
-          </Container>
+          {/* <Container style={{ padding: "1rem 1rem " }}>
+            <Row>
+              <Col xs={1}>
+                <MiniProfilePic profile_pic={props.post.user.profile_pic} />
+              </Col>
+              <Col>
+                <strong>{props.post.user.name}</strong>
+              </Col>
+            </Row>
+          </Container> */}
+          <UserNameCard
+            profile_pic={props.post.user.profile_pic}
+            name={props.post.user.name}
+          />
         </Link>
         {props.post.images &&
           props.post.images.map((image) => {

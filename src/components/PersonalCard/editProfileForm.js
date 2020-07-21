@@ -5,7 +5,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
-import MiniProfilePic from "./miniProfilePic";
+import MiniProfilePic from "../UserNameCard/miniProfilePic";
 import { selectUser } from "../../store/user/selectors";
 import { editProfile, updateProfilePic } from "../../store/user/actions";
 

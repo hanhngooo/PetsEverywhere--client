@@ -6,12 +6,13 @@ export default function MiniProfilePic(props) {
     <CloudinaryContext>
       <Image cloudName="hanhngo" publicId={props.profile_pic}>
         <Transformation
-          gravity="face:auto"
+          gravity="face"
           width="40"
           height="40"
           radius="max"
           zoom="0.6"
           crop="thumb"
+          flags="preserve_transparency"
           border="0.01px_solid_rgb:808080"
         />
       </Image>
