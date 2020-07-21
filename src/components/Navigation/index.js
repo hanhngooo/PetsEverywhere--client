@@ -22,7 +22,7 @@ export default function Navigation() {
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav style={{ width: "90%" }} fill>
-          <Search />
+          {token && <Search />}
 
           {token ? (
             <NavbarItem className="navBarItem" path="/" linkText="Home" />

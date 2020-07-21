@@ -6,6 +6,7 @@ import PostCard from "../../components/PostCard";
 import { fetchAllPosts } from "../../store/home/actions";
 import { selectAllPosts } from "../../store/home/selectors";
 import { selectUser } from "../../store/user/selectors";
+import { getAllUsers } from "../../store/users/actions";
 export default function Home() {
   const dispatch = useDispatch();
   const allPosts = useSelector(selectAllPosts);
@@ -17,6 +18,7 @@ export default function Home() {
       history.push("/login");
     }
     dispatch(fetchAllPosts());
+    dispatch(getAllUsers());
   }, [user.token, history, dispatch]);
 
   return (

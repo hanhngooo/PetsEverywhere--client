@@ -15,7 +15,6 @@ import PostDetail from "./pages/PostDetail";
 import { selectAppLoading } from "./store/appState/selectors";
 import { getUserWithStoredToken } from "./store/user/actions";
 import { selectToken } from "./store/user/selectors";
-import { getAllUsers } from "./store/users/actions";
 
 function App() {
   let location = useLocation();
@@ -26,7 +25,6 @@ function App() {
   // console.log(token);
   useEffect(() => {
     dispatch(getUserWithStoredToken());
-    dispatch(getAllUsers());
   }, [dispatch]);
 
   return (
