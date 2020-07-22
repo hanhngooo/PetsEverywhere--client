@@ -78,33 +78,36 @@ export default function PostCard(props) {
             color: "black",
           }}
         >
-          <Row>
-            <Col xs={0} md={4}>
-              <div className="usernamecard">
-                <UserNameCard
-                  profile_pic={props.post.user.profile_pic}
-                  name={props.post.user.name}
-                />
-              </div>
-            </Col>
-            <Col xs={7} className="commentdate">
-              {moment(props.post.createdAt).format("MMMM Do YYYY")}
-            </Col>
-          </Row>
+          <Container>
+            <Row>
+              <Col xs={0} md={4}>
+                <div className="usernamecard">
+                  <UserNameCard
+                    profile_pic={props.post.user.profile_pic}
+                    name={props.post.user.name}
+                  />
+                </div>
+              </Col>
+              <Col xs={7} className="commentdate">
+                {moment(props.post.createdAt).format("MMMM Do YYYY")}
+              </Col>
+            </Row>
+          </Container>
         </Link>
-        {props.post.images &&
-          props.post.images.map((image) => {
-            return (
-              <Image
-                cloudName="hanhngo"
-                publicId={image.public_Id}
-                width="637"
-                crop="scale"
-                key={image.id}
-              />
-            );
-          })}
-
+        <div className="post-image">
+          {props.post.images &&
+            props.post.images.map((image) => {
+              return (
+                <Image
+                  cloudName="hanhngo"
+                  publicId={image.public_Id}
+                  width="637"
+                  crop="scale"
+                  key={image.id}
+                />
+              );
+            })}
+        </div>
         <Container>
           <Row style={{ paddingTop: "1rem" }}>
             <Col xs={0} md={4}>
