@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { Container, Row, Col, CardDeck } from "react-bootstrap";
-import CardColumns from "react-bootstrap/CardColumns";
 
 import Upload from "../../components/UploadCard";
 import PersonalCard from "../../components/PersonalCard";
