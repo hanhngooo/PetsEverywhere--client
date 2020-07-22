@@ -54,7 +54,9 @@ export default function EditProfileForm() {
               <Form.Label>
                 <strong>Profile Picture</strong>
               </Form.Label>
-              <MiniProfilePic profile_pic={profile_pic} />
+              <div className="pb-3">
+                <MiniProfilePic profile_pic={profile_pic} />
+              </div>
               <Form.Control
                 value={profilePicInput}
                 onChange={handleFileInput}
