@@ -21,13 +21,13 @@ to be added
 
 ## Technology Used
 
-- [React]()
-- [Redux]()
+- [React](https://github.com/hanhngooo/PetsEverywhere--client/blob/development/src/App.js)
+- [Redux](https://github.com/hanhngooo/PetsEverywhere--client/tree/development/src/store)
 - [React Bootstrap](https://react-bootstrap.github.io/getting-started/introduction)
-- [Express]()
-  - [Rest API]()
-- [Sequelize]()
-- [Cloudinary]()
+- [Express](https://github.com/hanhngooo/PetsEverywhere-server/blob/development/index.js)
+  - [Rest API](https://github.com/hanhngooo/PetsEverywhere-server/tree/development/routers)
+- [Sequelize](https://github.com/hanhngooo/PetsEverywhere-server/tree/development/models)
+- [Cloudinary](https://github.com/hanhngooo/PetsEverywhere-server/blob/development/config/cloudinary.js)
 
 ## Goals of this project
 
@@ -39,7 +39,7 @@ The goal of this project is to learn team collaboration while building an app
 - Practice disciplined git usage like proper commits & branching
 - Practice merging of feature branches in git while resolving conflicts (if any)
 
-## User stories and Wireframe
+## User stories
 
 - User Stories
 
@@ -64,23 +64,34 @@ The goal of this project is to learn team collaboration while building an app
     - List of comments
     - Click on user name links to user's profile
 
+  - As a user, I want to be able to search for people's accounts to see their profiles
+
+    - Search bar on Navbar
+    - Auto suggestions of matched inputs
+
+  - As a user, I want to be able to see and interact with only one post when I click on a post.
+    - A modal page with seperate URL link to specific post
+    - Display of user name + avatar
+    - Caption
+    - Like button + Comment form
+    - List of Comment
+
 This mvp is still a work in progress. Some features still need to be implemented and revised.
 
 ## Git Workflow
 
-In this project I try to use:
-
-- Good commit messages
-- Named branches
-- Pull requests with proper summaries
-- Used development branch without merging to the master all-time
+- Seperate features by branches
+- Regular commit with messages
+- Pull requests with summaries
+- Used development branch as default
 
 ## How this app was built
 
 - [Logged-in user profile page](https://github.com/hanhngooo/PetsEverywhere--client/pull/1)
-- [Posts in Hompage](https://github.com/hanhngooo/PetsEverywhere--client/pull/2)
-- [Add Styling](https://github.com/hanhngooo/PetsEverywhere--client/pull/3)
+- [Posts in Homepage](https://github.com/hanhngooo/PetsEverywhere--client/pull/2)
 - [Profile Page Different Id](https://github.com/hanhngooo/PetsEverywhere--client/pull/5)
+- [Detail Post Modal Page](https://github.com/hanhngooo/PetsEverywhere--client/pull/6)
+- [Add Styling](https://github.com/hanhngooo/PetsEverywhere--client/pull/8)
 
 ## Server Repo
 
