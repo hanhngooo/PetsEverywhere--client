@@ -17,7 +17,7 @@ The country I come from is a developing country where animal welfare is not yet 
 
 ## App Demo
 
-to be added
+![PetsEverywhere Demo](https://media.giphy.com/media/dBgRK8pSKQL0fBITna/giphy.gif)
 
 ## Technology Used
 
