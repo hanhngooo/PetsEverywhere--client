@@ -65,7 +65,7 @@ export default function PostCard(props) {
     }
   }
   return (
-    <Card className="mx-auto" style={{ width: "40.03rem", margin: "5rem" }}>
+    <Card className="mx-auto" style={{ width: "40.03rem", margin: "3rem" }}>
       <CloudinaryContext key={props.post.id}>
         <Link
           to={
