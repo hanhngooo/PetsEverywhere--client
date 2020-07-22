@@ -15,28 +15,30 @@ export default function Navigation() {
   const loginLogoutControls = token ? <LoggedIn /> : null;
 
   return (
-    <Navbar bg="dark" variant="dark">
+    <Navbar bg="dark" variant="dark" className="shadow-lg  mb-4">
       <Navbar.Brand as={NavLink} to="/">
         <img src={logo} alt="logo" width="350" />
       </Navbar.Brand>
-      <Navbar.Toggle aria-controls="basic-navbar-nav" />
-      <Navbar.Collapse id="basic-navbar-nav">
-        <Nav style={{ width: "90%" }} fill>
-          {token && <Search />}
+      <div className="mx-auto">{token && <Search />}</div>
 
-          {token ? (
-            <NavbarItem className="navBarItem" path="/" linkText="Home" />
-          ) : null}
-          {token ? (
-            <NavbarItem
-              className="navBarItem"
-              path="/profile"
-              linkText="Profile"
-            />
-          ) : null}
-          {loginLogoutControls}
-        </Nav>
-      </Navbar.Collapse>
+      <Nav>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav style={{ width: "100%" }} className="ml-auto">
+            {token ? (
+              <NavbarItem className="navBarItem" path="/" linkText="Home" />
+            ) : null}
+            {token ? (
+              <NavbarItem
+                className="navBarItem"
+                path="/profile"
+                linkText="Profile"
+              />
+            ) : null}
+            {loginLogoutControls}
+          </Nav>
+        </Navbar.Collapse>
+      </Nav>
     </Navbar>
   );
 }

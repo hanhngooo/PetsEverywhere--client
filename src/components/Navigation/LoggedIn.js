@@ -11,12 +11,14 @@ export default function LoggedIn() {
 
   return (
     <>
-      <Nav.Item style={{ color: "white" }}>
+      <Nav.Item style={{ color: "white", padding: "0rem 1rem" }}>
         <UserNameCard profile_pic={user.profile_pic} name={user.name} />
       </Nav.Item>
-      <Button variant="info" onClick={() => dispatch(logOut())}>
-        Logout
-      </Button>
+      <Nav.Item style={{ paddingRight: "1rem" }}>
+        <Button variant="info" onClick={() => dispatch(logOut())}>
+          Logout
+        </Button>
+      </Nav.Item>
     </>
   );
 }
