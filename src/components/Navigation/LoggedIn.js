@@ -1,26 +1,29 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logOut } from "../../store/user/actions";
-import Button from "react-bootstrap/Button";
-import CardColumns from "react-bootstrap/CardColumns";
+import { Button, Nav } from "react-bootstrap";
+
 import { selectUser } from "../../store/user/selectors";
-import Nav from "react-bootstrap/Nav";
-import MiniProfilePic from "../PersonalCard/miniProfilePic";
+import UserNameCard from "../UserNameCard/userNameCard";
+
 export default function LoggedIn() {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
 
   return (
     <>
-      <CardColumns className="mt-2">
-        <Nav.Item>
-          <MiniProfilePic profile_pic={user.profile_pic} />
-        </Nav.Item>
-        <Nav.Item style={{ color: "white" }}>{user.name}</Nav.Item>
-      </CardColumns>
-      <Button variant="info" onClick={() => dispatch(logOut())}>
-        Logout
-      </Button>
+      <Nav.Item style={{ color: "white", padding: "0rem 1rem" }}>
+        <UserNameCard profile_pic={user.profile_pic} name={user.name} />
+      </Nav.Item>
+      <Nav.Item style={{ paddingRight: "1rem" }}>
+        <Link to="/login">
+          {" "}
+          <Button variant="info" onClick={() => dispatch(logOut())}>
+            Logout
+          </Button>
+        </Link>
+      </Nav.Item>
     </>
   );
 }

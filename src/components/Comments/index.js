@@ -1,8 +1,9 @@
 import React, { Fragment } from "react";
 import Accordion from "react-bootstrap/Accordion";
-import Card from "react-bootstrap/Card";
-
-import MiniProfilePic from "../PersonalCard/miniProfilePic";
+import { Card, Row, Col } from "react-bootstrap";
+import moment from "moment";
+import "./style.css";
+import UserNameCard from "../UserNameCard/userNameCard";
 
 export default function Comments(props) {
   return (
@@ -16,12 +17,26 @@ export default function Comments(props) {
             return (
               <Fragment key={comment.id}>
                 <Accordion.Collapse key={comment.id} eventKey="1">
-                  <Card.Body>
-                    <MiniProfilePic profile_pic={comment.user.profile_pic} />{" "}
-                    <span>
-                      <strong>{comment.user.name}</strong> {""}{" "}
-                      {comment.content}
-                    </span>
+                  <Card.Body
+                    style={{
+                      padding: "1rem",
+                      borderBottom: "0.5px solid rgb(233, 233, 233)",
+                    }}
+                  >
+                    <Row>
+                      <Col xs={2} md={4}>
+                        <UserNameCard
+                          profile_pic={comment.user && comment.user.profile_pic}
+                          name={comment.user && comment.user.name}
+                        />
+                      </Col>
+                      <Col className="comment-date">
+                        {moment(comment.createdAt).format("MMMM Do YYYY")}
+                      </Col>
+                    </Row>
+                    <Row>
+                      <div className="commentcontent">{comment.content}</div>
+                    </Row>
                   </Card.Body>
                 </Accordion.Collapse>
               </Fragment>

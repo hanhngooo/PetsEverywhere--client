@@ -69,7 +69,7 @@ export default function Search() {
           />
         </Col>
         <Col>
-          <Button onClick={handleSearch}>
+          <Button variant="info" onClick={handleSearch}>
             <BsSearch />
           </Button>
         </Col>
