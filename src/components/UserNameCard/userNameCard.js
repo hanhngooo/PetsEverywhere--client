@@ -7,7 +7,7 @@ export default function UserNameCard(props) {
   return (
     <Container>
       <Row>
-        <Col className="user-avatar" xs={0}>
+        <Col xs={0}>
           <MiniProfilePic profile_pic={props.profile_pic} />
         </Col>
         <Col className="user-name">

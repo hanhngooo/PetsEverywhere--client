@@ -109,22 +109,16 @@ export default function PostDetail() {
                   })}
               </Col>
               <Col xs={6} md={4} className="post-detail">
-                <Container>
+                <Container className="post-info">
                   <Row className="user-name-card">
-                    <Col xs={2}>
-                      {/* <MiniProfilePic
-                        profile_pic={post.user && post.user.profile_pic}
-                      /> */}
+                    <Col xs={0}>
                       <UserNameCard
                         profile_pic={post.user && post.user.profile_pic}
                         name={post.user && post.user.name}
                       />
                     </Col>{" "}
-                    <Col>
-                      {/* <strong>{post.user && post.user.name}</strong> */}
-                      <div className="post-date">
-                        <i>{moment(post.createdAt).format("MMMM Do YYYY")}</i>
-                      </div>
+                    <Col className="post-date">
+                      <i>{moment(post.createdAt).format("MMMM Do YYYY")}</i>
                     </Col>
                   </Row>
                   <Row className="caption-card">
@@ -132,7 +126,6 @@ export default function PostDetail() {
                   </Row>
                   <Row>
                     <Col xs={4}>
-                      {" "}
                       {likeButton()} {post.likes_num} likes
                     </Col>
                     <Col>
@@ -148,19 +141,7 @@ export default function PostDetail() {
                             key={comment.id}
                           >
                             <Row>
-                              {/* <Col xs={2}>
-                                <MiniProfilePic
-                                  profile_pic={
-                                    comment.user && comment.user.profile_pic
-                                  }
-                                />
-                              </Col>
-                              <Col className="comment-user">
-                                <strong>
-                                  {comment.user && comment.user.name}
-                                </strong>
-                              </Col> */}
-                              <Col>
+                              <Col xs={0}>
                                 <UserNameCard
                                   profile_pic={
                                     comment.user && comment.user.profile_pic

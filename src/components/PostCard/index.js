@@ -3,10 +3,13 @@ import { Link } from "react-router-dom";
 import { Image, CloudinaryContext } from "cloudinary-react";
 import { useDispatch, useSelector } from "react-redux";
 
+import "./style.css";
+
 import Card from "react-bootstrap/Card";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import moment from "moment";
 
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { MdComment } from "react-icons/md";
@@ -75,20 +78,19 @@ export default function PostCard(props) {
             color: "black",
           }}
         >
-          {/* <Container style={{ padding: "1rem 1rem " }}>
-            <Row>
-              <Col xs={1}>
-                <MiniProfilePic profile_pic={props.post.user.profile_pic} />
-              </Col>
-              <Col>
-                <strong>{props.post.user.name}</strong>
-              </Col>
-            </Row>
-          </Container> */}
-          <UserNameCard
-            profile_pic={props.post.user.profile_pic}
-            name={props.post.user.name}
-          />
+          <Row>
+            <Col xs={0} md={4}>
+              <div className="usernamecard">
+                <UserNameCard
+                  profile_pic={props.post.user.profile_pic}
+                  name={props.post.user.name}
+                />
+              </div>
+            </Col>
+            <Col xs={7} className="commentdate">
+              {moment(props.post.createdAt).format("MMMM Do YYYY")}
+            </Col>
+          </Row>
         </Link>
         {props.post.images &&
           props.post.images.map((image) => {
@@ -104,8 +106,8 @@ export default function PostCard(props) {
           })}
 
         <Container>
-          <Row style={{ padding: "1rem 1rem " }}>
-            <Col>
+          <Row style={{ paddingTop: "1rem" }}>
+            <Col xs={0} md={4}>
               {likeButton()} {props.post.likes_num} likes
             </Col>
             <Col>
@@ -113,7 +115,7 @@ export default function PostCard(props) {
             </Col>
           </Row>
         </Container>
-        <Card.Text style={{ padding: "1rem 1rem " }}>
+        <Card.Text style={{ padding: "0.5rem 0.5rem ", margin: "0.5rem" }}>
           {props.post.caption}
         </Card.Text>
         <Comments comments={props.post.comments} />
