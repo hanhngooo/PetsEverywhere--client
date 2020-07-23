@@ -34,10 +34,10 @@ export default function SignUp() {
   return (
     <Container className="loginPage">
       <Container style={{ textAlign: "center" }}>
-        <img src={logo} alt="logo" />
+        <img src={logo} alt="logo" width="250px" />
       </Container>
-      <Form as={Col} md={{ span: 6, offset: 3 }} className="mt-5">
-        <h1 className="mt-5 mb-5">Login</h1>
+      <Form as={Col} md={{ span: 6, offset: 3 }} className="mt-4">
+        <h2 className="mt-4 mb-4">Login</h2>
         <Form.Group controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
           <Form.Control
@@ -59,7 +59,7 @@ export default function SignUp() {
             required
           />
         </Form.Group>
-        <Form.Group className="mt-5">
+        <Form.Group className="mt-4">
           <Button variant="info" type="submit" onClick={submitForm}>
             Log in
           </Button>

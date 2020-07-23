@@ -17,7 +17,7 @@ export default function Navigation() {
   return (
     <Navbar bg="dark" variant="dark" className="shadow-lg  mb-4">
       <Navbar.Brand as={NavLink} to="/">
-        <img src={logo} alt="logo" width="350" />
+        <img src={logo} alt="logo" width="250" />
       </Navbar.Brand>
       <div className="mx-auto">{token && <Search />}</div>
 
