@@ -42,6 +42,7 @@ function ProfileById() {
                   <RowGrid key={post.id} rowPosts={posts.slice(i, i + 3)} />
                 );
               }
+              return null;
             })}
         </CardDeck>
       </Container>

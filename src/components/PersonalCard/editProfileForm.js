@@ -13,7 +13,7 @@ export default function EditProfileForm() {
   const { name, description, profile_pic } = useSelector(selectUser);
 
   const [showModal, setShowModal] = useState(false);
-  const [profilePicInput, setProfilePicInput] = useState("");
+  const [profilePicInput] = useState("");
   const [newName, setNewName] = useState("");
   const [descriptionInput, setDescriptionInput] = useState("");
   const dispatch = useDispatch();

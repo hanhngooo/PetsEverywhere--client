@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams, Link } from "react-router-dom";
 import { Image, CloudinaryContext } from "cloudinary-react";
-import { Row, Col, Container, Modal, Button } from "react-bootstrap";
+import { Row, Col, Container, Modal } from "react-bootstrap";
 import "./style.css";
 import moment from "moment";
 import { AiOutlineClose } from "react-icons/ai";

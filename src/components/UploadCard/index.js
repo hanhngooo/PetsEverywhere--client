@@ -9,7 +9,7 @@ import Image from "react-bootstrap/Image";
 import { uploadNewPost } from "../../store/user/actions";
 
 function Upload() {
-  const [fileInput, setFileInput] = useState("");
+  const [fileInput] = useState("");
   const [captionInput, setCaptionInput] = useState("");
   const [previewSource, setPreviewSource] = useState("");
   const [showModal, setShowModal] = useState(false);
