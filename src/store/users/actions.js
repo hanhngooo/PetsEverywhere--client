@@ -1,11 +1,6 @@
 import { apiUrl } from "../../config/constants";
 import axios from "axios";
-import {
-  appLoading,
-  appDoneLoading,
-  showMessageWithTimeout,
-  setMessage,
-} from "../appState/actions";
+import { appLoading, appDoneLoading } from "../appState/actions";
 
 export const FETCH_ALL_USERS_SUCCESS = "FETCH_ALL_USERS_SUCCESS";
 
