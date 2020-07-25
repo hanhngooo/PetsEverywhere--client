@@ -39,7 +39,6 @@ function App() {
         <Route path="/login" component={Login} />
         <Route path="/post/:id" component={PostDetail} />
         <Route path="/user/:id" component={ProfileById} />
-        <Route path="*" component={Home} />
       </Switch>
       {background && <Route path="/post/:id" component={PostDetail} />}
     </div>
