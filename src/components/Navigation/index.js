@@ -4,28 +4,41 @@ import Nav from "react-bootstrap/Nav";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectToken } from "../../store/user/selectors";
+import Search from "../SearchBar/search";
 import NavbarItem from "./NavbarItem";
 import LoggedIn from "./LoggedIn";
-import LoggedOut from "./LoggedOut";
+import logo from "../../assets/logo2.png";
 
 export default function Navigation() {
   const token = useSelector(selectToken);
 
-  const loginLogoutControls = token ? <LoggedIn /> : <LoggedOut />;
+  const loginLogoutControls = token ? <LoggedIn /> : null;
 
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar bg="dark" variant="dark" className="shadow-lg  mb-4">
       <Navbar.Brand as={NavLink} to="/">
-        YOUR PROJECT NAME
+        <img src={logo} alt="logo" width="250" />
       </Navbar.Brand>
-      <Navbar.Toggle aria-controls="basic-navbar-nav" />
-      <Navbar.Collapse id="basic-navbar-nav">
-        <Nav style={{ width: "100%" }} fill>
-          <NavbarItem path="/" linkText="Home" />
-          <NavbarItem path="/other" linkText="Other" />
-          {loginLogoutControls}
-        </Nav>
-      </Navbar.Collapse>
+      <div className="mx-auto">{token && <Search />}</div>
+
+      <Nav>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav style={{ width: "100%" }} className="ml-auto">
+            {token ? (
+              <NavbarItem className="navBarItem" path="/" linkText="Home" />
+            ) : null}
+            {token ? (
+              <NavbarItem
+                className="navBarItem"
+                path="/profile"
+                linkText="Profile"
+              />
+            ) : null}
+            {loginLogoutControls}
+          </Nav>
+        </Navbar.Collapse>
+      </Nav>
     </Navbar>
   );
 }
