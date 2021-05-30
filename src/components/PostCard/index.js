@@ -1,44 +1,38 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { Image, CloudinaryContext } from "cloudinary-react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react"
+import { Link } from "react-router-dom"
+import { Image, CloudinaryContext } from "cloudinary-react"
+import { useDispatch, useSelector } from "react-redux"
 
-import "./style.css";
-
-import Card from "react-bootstrap/Card";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import moment from "moment";
-
-import { FaHeart, FaRegHeart } from "react-icons/fa";
-import { MdComment } from "react-icons/md";
-import UserNameCard from "../UserNameCard/userNameCard";
-import Comments from "../Comments/index";
-import CommentForm from "../Comments/commentForm";
-import { selectUser } from "../../store/user/selectors";
-import { likeAPost, unlikeAPost } from "../../store/user/actions";
+import moment from "moment"
+import "./style.css"
+import { FaHeart, FaRegHeart } from "react-icons/fa"
+import { MdComment } from "react-icons/md"
+import UserNameCard from "../UserNameCard/userNameCard"
+import Comments from "../Comments/index"
+import CommentForm from "../Comments/commentForm"
+import { selectUser } from "../../store/user/selectors"
+import { likeAPost, unlikeAPost } from "../../store/user/actions"
 
 export default function PostCard(props) {
-  const dispatch = useDispatch();
-  const loggedInUserId = useSelector(selectUser).id;
+  const dispatch = useDispatch()
+  const loggedInUserId = useSelector(selectUser).id
 
   function checkLikedPost() {
     if (
       props.user.likes &&
       props.user.likes.find((like) => like.postId === props.post.id)
     ) {
-      return true;
+      return true
     } else {
-      return false;
+      return false
     }
   }
 
   function onClickLikePost(postId) {
-    dispatch(likeAPost(postId));
+    dispatch(likeAPost(postId))
   }
   function onClickUnLikePost(postId) {
-    dispatch(unlikeAPost(postId));
+    dispatch(unlikeAPost(postId))
   }
 
   function likeButton() {
@@ -51,22 +45,24 @@ export default function PostCard(props) {
         >
           <FaHeart />
         </button>
-      );
+      )
     } else {
       return (
         <button
+          className="p-0"
           style={{ border: "none", background: "none" }}
           name="undo like"
           onClick={() => onClickLikePost(props.post.id)}
         >
           <FaRegHeart />
         </button>
-      );
+      )
     }
   }
+
   return (
-    <Card className="mx-auto" style={{ width: "40.03rem", margin: "3rem" }}>
-      <CloudinaryContext key={props.post.id}>
+    <div className=" border mx-auto my-4 px-3" style={{ maxWidth: "600px" }}>
+      <div className="d-flex align-items-center  justify-content-between py-3">
         <Link
           to={
             loggedInUserId !== props.post.userId
@@ -78,52 +74,37 @@ export default function PostCard(props) {
             color: "black",
           }}
         >
-          <Container>
-            <Row>
-              <Col xs={0} md={4}>
-                <div className="usernamecard">
-                  <UserNameCard
-                    profile_pic={props.post.user.profile_pic}
-                    name={props.post.user.name}
-                  />
-                </div>
-              </Col>
-              <Col xs={7} className="commentdate">
-                {moment(props.post.createdAt).format("MMMM Do YYYY")}
-              </Col>
-            </Row>
-          </Container>
+          <div className="username-card">
+            <UserNameCard
+              profile_pic={props.post.user.profile_pic}
+              name={props.post.user.name}
+            />
+          </div>
         </Link>
-        <div className="post-image">
-          {props.post.images &&
-            props.post.images.map((image) => {
-              return (
-                <Image
-                  cloudName="hanhngo"
-                  publicId={image.public_Id}
-                  width="637"
-                  crop="scale"
-                  key={image.id}
-                />
-              );
-            })}
+        {moment(props.post.createdAt).format("MMMM Do YYYY")}
+      </div>
+
+      <Image
+        className="post-image"
+        cloudName="hanhngo"
+        publicId={props.post.images[0].public_Id}
+        width="auto"
+        crop="scale"
+        key={props.post.images[0].id}
+        responsive
+      />
+
+      <div className="d-flex py-3">
+        <div className="mr-3">
+          {likeButton()} {props.post.likes_num} likes
         </div>
-        <Container>
-          <Row style={{ paddingTop: "1rem" }}>
-            <Col xs={0} md={4}>
-              {likeButton()} {props.post.likes_num} likes
-            </Col>
-            <Col>
-              <MdComment /> {props.post.comments_num} comments
-            </Col>
-          </Row>
-        </Container>
-        <Card.Text style={{ padding: "0.5rem 0.5rem ", margin: "0.5rem" }}>
-          {props.post.caption}
-        </Card.Text>
-        <Comments comments={props.post.comments} />
-        <CommentForm postId={props.post.id} />
-      </CloudinaryContext>
-    </Card>
-  );
+        <div>
+          <MdComment /> {props.post.comments_num} comments
+        </div>
+      </div>
+      <div className="pb-3 font-weight-bolder">{props.post.caption}</div>
+      <Comments comments={props.post.comments} />
+      <CommentForm postId={props.post.id} />
+    </div>
+  )
 }

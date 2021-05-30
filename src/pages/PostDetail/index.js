@@ -1,51 +1,51 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useHistory, useParams, Link } from "react-router-dom";
-import { Image, CloudinaryContext } from "cloudinary-react";
-import { Row, Col, Container, Modal } from "react-bootstrap";
-import "./style.css";
-import moment from "moment";
-import { AiOutlineClose } from "react-icons/ai";
-import { MdComment } from "react-icons/md";
-import { FaHeart, FaRegHeart } from "react-icons/fa";
+import React, { useEffect, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { useHistory, useParams, Link } from "react-router-dom"
+import { Image, CloudinaryContext } from "cloudinary-react"
+import { Row, Col, Container, Modal } from "react-bootstrap"
+import "./style.css"
+import moment from "moment"
+import { AiOutlineClose } from "react-icons/ai"
+import { MdComment } from "react-icons/md"
+import { FaHeart, FaRegHeart } from "react-icons/fa"
 
-import UserNameCard from "../../components/UserNameCard/userNameCard";
-import CommentForm from "../../components/Comments/commentForm";
-import { fetchAPost } from "../../store/postDetail/actions";
-import { selectPostById } from "../../store/postDetail/selectors";
-import { likeAPost, unlikeAPost } from "../../store/user/actions";
-import { selectUser } from "../../store/user/selectors";
+import UserNameCard from "../../components/UserNameCard/userNameCard"
+import CommentForm from "../../components/Comments/commentForm"
+import { fetchAPost } from "../../store/postDetail/actions"
+import { selectPostById } from "../../store/postDetail/selectors"
+import { likeAPost, unlikeAPost } from "../../store/user/actions"
+import { selectUser } from "../../store/user/selectors"
 
 export default function PostDetail() {
-  let history = useHistory();
-  const postId = useParams().id;
-  const [showModal, setShowModal] = useState(true);
-  const dispatch = useDispatch();
-  const post = useSelector(selectPostById);
-  const user = useSelector(selectUser);
+  let history = useHistory()
+  const postId = useParams().id
+  const [showModal, setShowModal] = useState(true)
+  const dispatch = useDispatch()
+  const post = useSelector(selectPostById)
+  const user = useSelector(selectUser)
 
   useEffect(() => {
-    dispatch(fetchAPost(postId));
-  }, [dispatch, postId]);
+    dispatch(fetchAPost(postId))
+  }, [dispatch, postId])
 
   let back = (event) => {
-    event.stopPropagation();
-    history.goBack();
-  };
+    event.stopPropagation()
+    history.goBack()
+  }
 
   function checkLikedPost() {
     if (user.likes && user.likes.find((like) => like.postId === post.id)) {
-      return true;
+      return true
     } else {
-      return false;
+      return false
     }
   }
 
   function onClickLikePost(postId) {
-    dispatch(likeAPost(postId));
+    dispatch(likeAPost(postId))
   }
   function onClickUnLikePost(postId) {
-    dispatch(unlikeAPost(postId));
+    dispatch(unlikeAPost(postId))
   }
 
   function likeButton() {
@@ -58,7 +58,7 @@ export default function PostDetail() {
         >
           <FaHeart />
         </button>
-      );
+      )
     } else {
       return (
         <button
@@ -68,7 +68,7 @@ export default function PostDetail() {
         >
           <FaRegHeart />
         </button>
-      );
+      )
     }
   }
   return (
@@ -77,6 +77,7 @@ export default function PostDetail() {
         show={showModal}
         onHide={() => setShowModal(false)}
         dialogClassName="custom-modal"
+        backdrop="static"
       >
         <Modal.Body className="modal-body">
           <Link
@@ -91,84 +92,73 @@ export default function PostDetail() {
               onClick={back}
             />
           </Link>
-          <Container className="modal-container">
+          <Container>
             <Row>
-              <Col xs={10} md={8}>
-                {post.images &&
-                  post.images.map((image) => {
-                    return (
-                      <CloudinaryContext key={image.id}>
-                        <Image
-                          cloudName="hanhngo"
-                          publicId={image.public_Id}
-                          width="600"
-                          crop="fill"
-                        />
-                      </CloudinaryContext>
-                    );
-                  })}
+              <Col md={12} lg={8} className="pt-2 px-0 mx-auto">
+                <CloudinaryContext>
+                  <Image
+                    cloudName="hanhngo"
+                    publicId={post.images?.[0].public_Id}
+                    key={post.images?.[0].id}
+                    width="550"
+                    crop="fill"
+                  />
+                </CloudinaryContext>
               </Col>
-              <Col md={4} className="post-detail">
-                <Container className="post-info">
-                  <Row className="user-name-card">
-                    <Col xs={0}>
-                      <UserNameCard
-                        profile_pic={post.user && post.user.profile_pic}
-                        name={post.user && post.user.name}
-                      />
-                    </Col>{" "}
-                    <Col className="post-date">
-                      <i>{moment(post.createdAt).format("MMMM Do YYYY")}</i>
-                    </Col>
-                  </Row>
-                  <Row className="caption-card">
-                    <Col>{post.caption}</Col>
-                  </Row>
-                  <Row>
-                    <Col xs={6}>
+              <Col md={12} lg={4} className="post-detail pl-0  pt-2">
+                <div
+                  className="post-info d-flex flex-column overflow-hidden"
+                  style={{ height: "100%" }}
+                >
+                  <div className="d-flex align-items-center  justify-content-between px-1">
+                    <UserNameCard
+                      profile_pic={post.user && post.user.profile_pic}
+                      name={post.user && post.user.name}
+                    />
+                    <i>{moment(post.createdAt).format("MMMM Do YYYY")}</i>
+                  </div>
+
+                  <p className="pt-4 px-1">{post.caption}</p>
+
+                  <div className="d-flex py-3">
+                    <div className="mr-3">
                       {likeButton()} {post.likes_num} likes
-                    </Col>
-                    <Col>
+                    </div>
+                    <div>
                       <MdComment /> {post.comments_num} comments
-                    </Col>
-                  </Row>
-                  <Row className="comment-all">
+                    </div>
+                  </div>
+                  <div className="comment-all">
                     {post.comments &&
                       post.comments.map((comment) => {
                         return (
-                          <Container
-                            className="comment-container"
-                            key={comment.id}
-                          >
-                            <Row>
-                              <Col xs={0}>
-                                <UserNameCard
-                                  profile_pic={
-                                    comment.user && comment.user.profile_pic
-                                  }
-                                  name={comment.user && comment.user.name}
-                                />
-                              </Col>
-                              <Col className="comment-date">
+                          <div className="border-bottom py-3" key={comment.id}>
+                            <div className="d-flex justify-content-between align-items-center px-1">
+                              <UserNameCard
+                                profile_pic={
+                                  comment.user && comment.user.profile_pic
+                                }
+                                name={comment.user && comment.user.name}
+                              />
+                              <i>
                                 {moment(post.createdAt).format("MMMM Do YYYY")}
-                              </Col>
-                            </Row>
-                            <Row className="comment-content">
-                              <Col>{comment.content}</Col>
-                            </Row>
-                          </Container>
-                        );
+                              </i>
+                            </div>
+
+                            <p className="pl-5  mb-0">{comment.content}</p>
+                          </div>
+                        )
                       })}
-                  </Row>
-                </Container>
-                <Row className="comment-form">
-                  <CommentForm postId={post.id} />
-                </Row>
+                  </div>
+                  <div className="comment-form">
+                    <CommentForm postId={post.id} />
+                  </div>
+                </div>
               </Col>
             </Row>
           </Container>
         </Modal.Body>
       </Modal>
     </div>
-  );
+  )
 }

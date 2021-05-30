@@ -1,19 +1,12 @@
-import React from "react";
-import "./style.css";
-import MiniProfilePic from "./miniProfilePic";
-import { Container, Row, Col } from "react-bootstrap";
+import React from "react"
+import "./style.css"
+import MiniProfilePic from "./miniProfilePic"
 
 export default function UserNameCard(props) {
   return (
-    <Container>
-      <Row>
-        <Col xs={0}>
-          <MiniProfilePic profile_pic={props.profile_pic} />
-        </Col>
-        <Col className="user-name">
-          <strong>{props.name}</strong>
-        </Col>
-      </Row>
-    </Container>
-  );
+    <div className="user-name-card d-flex align-items-center">
+      <MiniProfilePic profile_pic={props.profile_pic} />
+      <div className="font-weight-bold px-2">{props.name}</div>
+    </div>
+  )
 }

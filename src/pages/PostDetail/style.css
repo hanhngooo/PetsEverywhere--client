@@ -1,41 +1,15 @@
 .custom-modal {
   max-width: 75vw !important;
 }
-.modal-container {
-  padding-bottom: 1rem;
-  padding-top: 1rem;
-}
-.post-detail {
+.post-info {
   position: relative;
 }
-.post-info {
-  padding-left: 0rem;
+
+.comment-all {
+  height: 300px;
+  overflow: auto;
 }
-.user-name-card {
-  padding-right: 0rem;
-  padding-left: 0rem;
-}
-.post-date {
-  font-size: 0.9rem;
-  color: rgb(134, 134, 134);
-  padding-top: 0.5rem;
-  text-align: right;
-}
-.caption-card {
-  padding-top: 1rem;
-  padding-left: 0rem;
-  padding-bottom: 1rem;
-}
-.comment-container {
-  padding-top: 1rem;
-  padding-bottom: 0.8rem;
-  padding-left: 0rem;
-  padding-right: 0rem;
-  border-bottom: 0.5px solid rgb(233, 233, 233);
-}
-.comment-user {
-  padding-top: 0.5rem;
-}
+
 .comment-content {
   padding-left: 2rem;
   overflow-wrap: break-word;
