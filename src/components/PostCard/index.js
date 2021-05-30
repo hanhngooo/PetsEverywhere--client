@@ -1,6 +1,6 @@
 import React from "react"
 import { Link } from "react-router-dom"
-import { Image, CloudinaryContext } from "cloudinary-react"
+import { Image, CloudinaryContext, Transformation } from "cloudinary-react"
 import { useDispatch, useSelector } from "react-redux"
 
 import moment from "moment"
@@ -81,19 +81,22 @@ export default function PostCard(props) {
             />
           </div>
         </Link>
-        {moment(props.post.createdAt).format("MMMM Do YYYY")}
+        {moment(props.post.updatedAt).format("MMMM Do YYYY")}
       </div>
 
       <Image
         className="post-image"
         cloudName="hanhngo"
         publicId={props.post.images[0].public_Id}
-        width="auto"
-        crop="scale"
         key={props.post.images[0].id}
         responsive
-      />
-
+      >
+        <Transformation
+          width="auto"
+          crop="scale"
+          responsive_placeholder="blank"
+        />
+      </Image>
       <div className="d-flex py-3">
         <div className="mr-3">
           {likeButton()} {props.post.likes_num} likes

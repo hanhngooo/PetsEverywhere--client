@@ -1,29 +1,29 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
 
-import { Container, Row, Col, CardDeck } from "react-bootstrap";
+import { Container, Row, Col, CardDeck } from "react-bootstrap"
 
-import Upload from "../../components/UploadCard";
-import PersonalCard from "../../components/PersonalCard";
-import ProfilePic from "../../components/PersonalCard/profilePic";
-import RowGrid from "./rowGrid";
-import { selectUser } from "../../store/user/selectors";
-import { getUserWithStoredToken } from "../../store/user/actions";
+import Upload from "../../components/UploadCard"
+import PersonalCard from "../../components/PersonalCard"
+import ProfilePic from "../../components/PersonalCard/profilePic"
+import RowGrid from "./rowGrid"
+import { selectUser } from "../../store/user/selectors"
+import { getUserWithStoredToken } from "../../store/user/actions"
 
 function Profile() {
-  const dispatch = useDispatch();
-  const { id, name, description, profile_pic, posts } = useSelector(selectUser);
+  const dispatch = useDispatch()
+  const { id, name, description, profile_pic, posts } = useSelector(selectUser)
 
   useEffect(() => {
-    dispatch(getUserWithStoredToken());
-  }, [dispatch]);
+    dispatch(getUserWithStoredToken())
+  }, [dispatch])
   return (
     <Container>
       <Row className="profile-info">
-        <Col xs={2} md={4}>
+        <Col xs={12} sm={12} md={4}>
           <ProfilePic profile_pic={profile_pic} />
         </Col>
-        <Col>
+        <Col xs={12} sm={12} md={8}>
           <PersonalCard
             profile_pic={profile_pic}
             name={name}
@@ -41,14 +41,14 @@ function Profile() {
               if (i % 3 === 0) {
                 return (
                   <RowGrid key={post.id} rowPosts={posts.slice(i, i + 3)} />
-                );
+                )
               }
-              return null;
+              return null
             })}
         </CardDeck>
       </Container>
     </Container>
-  );
+  )
 }
 
-export default Profile;
+export default Profile

@@ -115,7 +115,7 @@ export default function PostDetail() {
                       profile_pic={post.user && post.user.profile_pic}
                       name={post.user && post.user.name}
                     />
-                    <i>{moment(post.createdAt).format("MMMM Do YYYY")}</i>
+                    <i>{moment(post.updatedAt).format("MMMM Do YYYY")}</i>
                   </div>
 
                   <p className="pt-4 px-1">{post.caption}</p>
@@ -141,7 +141,7 @@ export default function PostDetail() {
                                 name={comment.user && comment.user.name}
                               />
                               <i>
-                                {moment(post.createdAt).format("MMMM Do YYYY")}
+                                {moment(post.updatedAt).format("MMMM Do YYYY")}
                               </i>
                             </div>
 
